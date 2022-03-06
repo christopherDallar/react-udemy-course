@@ -1,17 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const regard = 'Saludo';
-// const regard = ['Saludo 1', 'Saludo 2']; //Work
-// const regard = false; Not work
-// const regard = { text: ''}; Not work
+// props means properties
 
-const FirstApp = () => {
+const FirstApp = ({ regard }) => {
   return (
     <>
       <h1>{regard} World</h1>
       <p>Mi primera app</p>
     </>
   );
+};
+
+FirstApp.propTypes = {
+  regard: PropTypes.string.isRequired,
+  // other: PropTypes.number.isRequired
 };
 
 export default FirstApp;
