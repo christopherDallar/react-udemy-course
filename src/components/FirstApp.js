@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 const FirstApp = ({ regard, subtitle }) => {
   return (
     <>
-      <h1>{regard}</h1>
+      <h1>{regard}!!!</h1>
       <p>Mi primera app</p>
       <p>{subtitle}</p>
     </>
