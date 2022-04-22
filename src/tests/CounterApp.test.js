@@ -4,9 +4,14 @@ import { shallow } from 'enzyme';
 import CounterApp from '../components/CounterApp';
 
 describe('Test on FirstApp Component', () => {
-  test('should Match With Snapshot CounterApp Correctly', () => {
-    const wrapper = shallow(<CounterApp />);
+  // let wrapper = shallow(<CounterApp />); // If you want the intellisense
+  let wrapper;
 
+  beforeEach(() => {
+    wrapper = shallow(<CounterApp />);
+  });
+
+  test('should Match With Snapshot CounterApp Correctly', () => {
     expect(wrapper).toMatchSnapshot(); // To Save the literal rendered component and compare with wrapper if you press 'u' update the snapshot
   });
 
@@ -15,9 +20,25 @@ describe('Test on FirstApp Component', () => {
 
     const wrapper = shallow(<CounterApp value={value} />);
 
-    const textParagraph = wrapper.find('h2').text().trim();
-    // console.log(`xxx${textParagraph}xxx`);
+    const counterValue = wrapper.find('h2').text().trim();
+    // console.log(`xxx${counterValue}xxx`);
 
-    expect(textParagraph).toBe(`${value}`); // To Save the literal rendered component and compare with wrapper if you press 'u' update the snapshot
+    expect(counterValue).toBe(`${value}`);
+  });
+
+  test('should increment value from 10 to 11 with +1 button', () => {
+    wrapper.find('button').at(0).simulate('click');
+    // console.log(btn1.html());
+    const counterValue = wrapper.find('h2').text().trim();
+
+    expect(counterValue).toBe('11');
+  });
+
+  test('should decrement value from 11 to 10 with -1 button', () => {
+    wrapper.find('button').at(2).simulate('click');
+    // console.log(btn1.html());
+    const counterValue = wrapper.find('h2').text().trim();
+
+    expect(counterValue).toBe('9');
   });
 });
