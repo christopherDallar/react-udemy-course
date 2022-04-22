@@ -4,8 +4,8 @@ import { shallow } from 'enzyme';
 import CounterApp from '../components/CounterApp';
 
 describe('Test on FirstApp Component', () => {
-  // let wrapper = shallow(<CounterApp />); // If you want the intellisense
-  let wrapper;
+  let wrapper = shallow(<CounterApp />); // If you want the intellisense
+  // let wrapper; // The god practice but lost the intellisense help
 
   beforeEach(() => {
     wrapper = shallow(<CounterApp />);
@@ -34,11 +34,22 @@ describe('Test on FirstApp Component', () => {
     expect(counterValue).toBe('11');
   });
 
-  test('should decrement value from 11 to 10 with -1 button', () => {
+  test('should decrement value from 10 to 9 with -1 button', () => {
     wrapper.find('button').at(2).simulate('click');
     // console.log(btn1.html());
     const counterValue = wrapper.find('h2').text().trim();
 
     expect(counterValue).toBe('9');
+  });
+
+  test('should reset value from 11 to 10 with reset button', () => {
+    wrapper.find('button').at(0).simulate('click');
+    wrapper.find('button').at(0).simulate('click');
+
+    wrapper.find('button').at(1).simulate('click');
+
+    const counterValue = wrapper.find('h2').text().trim();
+
+    expect(counterValue).toBe('10');
   });
 });
