@@ -17,11 +17,24 @@ describe('Test on FirstApp Component', () => {
   //   expect(getByText(regardPruebas sobre componentes de React)).toBeInTheDocument();
   // });
 
+  // test('should show Firts App Correctly', () => {
+  //   const regard = 'Hello, I am Goku';
+
+  //   const wrapper = shallow(<FirstApp regard={regard} />);
+
+  //   expect(wrapper).toMatchSnapshot(); // To Save the literal rendered component and compare with wrapper if you press 'u' update the snapshot
+  // });
+
   test('should show Firts App Correctly', () => {
     const regard = 'Hello, I am Goku';
+    const subtitle = 'I am subtitle';
 
-    const wrapper = shallow(<FirstApp regard={regard} />);
+    const wrapper = shallow(
+      <FirstApp regard={regard} subtitle={subtitle} />,
+    );
 
-    expect(wrapper).toMatchSnapshot(); // To Save the literal rendered component and compare with wrapper if you press 'u' update the snapshot
+    const textParagraph = wrapper.find('.subtitle').text();
+
+    expect(textParagraph).toBe(subtitle);
   });
 });

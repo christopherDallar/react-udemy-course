@@ -8,7 +8,7 @@ const FirstApp = ({ regard, subtitle }) => {
     <>
       <h1>{regard}!!!</h1>
       <p>Mi primera app</p>
-      <p>{subtitle}</p>
+      <p className="subtitle">{subtitle}</p>
     </>
   );
 };
@@ -19,7 +19,7 @@ FirstApp.propTypes = {
   // other: PropTypes.number.isRequired
 };
 FirstApp.defaultProps = {
-  subtitle: '',
+  subtitle: 'I am subtitle',
   // subtitle: 'Soy un subtitle',
 };
 
