@@ -10,7 +10,7 @@ export const GifGrid = ({ category }) => {
 
 	const getGifs = async () => {
 		const url =
-			'https://api.giphy.com/v1/gifs/search?q=Rick and&limit=10&api_key=4PcTaskj1GEQj0JDFKX59fsQ6RKYDlUH';
+			'https://api.giphy.com/v1/gifs/search?q=one punch&limit=10&api_key=4PcTaskj1GEQj0JDFKX59fsQ6RKYDlUH';
 		const resp = await fetch(url);
 		const { data } = await resp.json();
 
@@ -28,10 +28,11 @@ export const GifGrid = ({ category }) => {
 	return (
 		<>
 			<h3>{category}</h3>
-
-			{images.map((img) => (
-				<GifGridItem key={img.id} {...img} />
-			))}
+			<div className='card-grid'>
+				{images.map((img) => (
+					<GifGridItem key={img.id} {...img} />
+				))}
+			</div>
 		</>
 	);
 };
