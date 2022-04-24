@@ -1,21 +1,17 @@
-import { React, useState } from "react";
-import { AddCategory } from "./shared/components/AddCategory";
+import { React, useState } from 'react';
+import { AddCategory } from './shared/components/AddCategory';
 
 export const GiftExpertApp = () => {
-	const [categories] = useState(["One punch", "Samurai x", "Dragon Ball"]);
-
-	// const HandleAddCategory = () => {
-	// 	// setCategories((cat) => {
-	// 	// 	return [...cat, "HunterXHunter", "Digimon"];
-	// 	// });
-
-	// 	setCategories([...categories, "HunterXHunter", "Digimon"]);
-	// };
+	const [categories, setCategories] = useState([
+		'One punch',
+		'Samurai x',
+		'Dragon Ball',
+	]);
 
 	return (
 		<>
 			<h1>GiftExpertApp</h1>
-			<AddCategory />
+			<AddCategory setCategories={setCategories} />
 			<hr></hr>
 
 			<ol>
