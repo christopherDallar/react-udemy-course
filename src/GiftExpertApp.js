@@ -1,12 +1,9 @@
 import { React, useState } from 'react';
 import { AddCategory } from './shared/components/AddCategory';
+import { GifGrid } from './shared/components/GifGrid';
 
 export const GiftExpertApp = () => {
-	const [categories, setCategories] = useState([
-		'One punch',
-		'Samurai x',
-		'Dragon Ball',
-	]);
+	const [categories, setCategories] = useState(['One punch']);
 
 	return (
 		<>
@@ -16,7 +13,8 @@ export const GiftExpertApp = () => {
 
 			<ol>
 				{categories.map((cat, i) => (
-					<li key={cat + i}>{cat}</li>
+					// <li key={cat + i}>{cat}</li>
+					<GifGrid key={cat + i} category={cat} />
 				))}
 			</ol>
 		</>
