@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  # NGINX
+  nginx_service:
+    image: nginx:stable
+    volumes:
+      - './build/:/usr/share/nginx/html/'
+      - './server/:/etc/nginx/'
+    ports:
+      - 3001:80
