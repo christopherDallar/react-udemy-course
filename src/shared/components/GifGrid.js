@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { GifGridItem } from './GifGridItem';
-import GifService from './../../core/services/gif/Gif.service';
+import GifService from '../../core/services/gif/gif.service';
 
 export const GifGrid = ({ category }) => {
 	const [images, setImages] = useState([]);
