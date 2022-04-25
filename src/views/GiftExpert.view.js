@@ -1,5 +1,5 @@
 import { React, useState } from 'react';
-import { UiAddCategory } from '../shared/components/ui/AddCategory.component';
+import { UiAddCategory } from '../shared/components/ui/UiAddCategory.component';
 import { GifGrid } from '../shared/components/gif/GifGrid.component';
 
 export const ViewGiftExpert = () => {
