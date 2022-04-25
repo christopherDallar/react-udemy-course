@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import GifService from './../../core/services/gif/gif.service';
+import ServiceGif from './../../core/services/gif/Gif.service';
 
 export const useFetchGifs = (category) => {
 	const [state, setState] = useState({
@@ -8,7 +8,7 @@ export const useFetchGifs = (category) => {
 	});
 
 	useEffect(() => {
-		GifService.getGifs(category).then((imgs) =>
+		ServiceGif.getGifs(category).then((imgs) =>
 			setTimeout(() => {
 				setState({
 					data: imgs,

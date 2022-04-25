@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 import { UiAddCategory } from '../shared/components/ui/UiAddCategory.component';
-import { GifGrid } from '../shared/components/gif/GifGrid.component';
+import { GifGrid } from './../shared/components/gif/GifGrid.component';
 
 export const ViewGiftExpert = () => {
 	const [categories, setCategories] = useState(['One punch']);
