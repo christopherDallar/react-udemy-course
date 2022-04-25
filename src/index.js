@@ -1,12 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.css";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import { ViewGiftExpert } from './views/GiftExpert.view';
 
-import { GiftExpertApp } from "./GiftExpertApp";
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	// <React.StrictMode>
-	<GiftExpertApp />
+	<ViewGiftExpert />
 	// </React.StrictMode>
 );

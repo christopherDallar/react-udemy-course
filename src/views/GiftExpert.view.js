@@ -1,14 +1,14 @@
 import { React, useState } from 'react';
-import { AddCategory } from './shared/components/AddCategory';
-import { GifGrid } from './shared/components/GifGrid';
+import { UiAddCategory } from '../shared/components/ui/AddCategory.component';
+import { GifGrid } from '../shared/components/gif/GifGrid.component';
 
-export const GiftExpertApp = () => {
+export const ViewGiftExpert = () => {
 	const [categories, setCategories] = useState(['One punch']);
 
 	return (
 		<>
 			<h1>GiftExpertApp</h1>
-			<AddCategory setCategories={setCategories} />
+			<UiAddCategory setCategories={setCategories} />
 			<hr></hr>
 
 			<ol>

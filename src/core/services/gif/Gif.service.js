@@ -19,8 +19,8 @@ const getGifs = async (category, setState) => {
 	return gifs;
 };
 
-const GifService = {
+const ServiceGif = {
 	getGifs,
 };
 
-export default GifService;
+export default ServiceGif;
