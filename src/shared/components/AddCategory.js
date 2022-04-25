@@ -19,7 +19,7 @@ export const AddCategory = ({ setCategories }) => {
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<h1>"{inputValue}" (Must to be larger of 2 length)</h1>
+			<h1>"{inputValue}" (Min 2 length)</h1>
 			<input type='text' value={inputValue} onChange={handleInputChange} />
 		</form>
 	);
