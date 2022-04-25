@@ -6,25 +6,7 @@ export const GifGrid = ({ category }) => {
 	const [images, setImages] = useState([]);
 
 	useEffect(() => {
-		// const getGifs = async () => {
-		// 	const url = `https://api.giphy.com/v1/gifs/search?q=${encodeURI(
-		// 		category
-		// 	)}&limit=10&api_key=4PcTaskj1GEQj0JDFKX59fsQ6RKYDlUH`;
-		// 	const resp = await fetch(url);
-		// 	const { data } = await resp.json();
-
-		// 	const gifs = data.map((img) => {
-		// 		return {
-		// 			id: img.id,
-		// 			title: img.title,
-		// 			url: img.images.downsized_medium.url,
-		// 		};
-		// 	});
-
-		// 	setImages(gifs);
-		// };
-
-		GifService.getGifs(category, setImages);
+		GifService.getGifs(category).then(setImages);
 	}, [category]);
 
 	return (

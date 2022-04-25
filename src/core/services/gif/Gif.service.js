@@ -16,7 +16,7 @@ const getGifs = async (category, setState) => {
 		};
 	});
 
-	setState(gifs);
+	return gifs;
 };
 
 const GifService = {
