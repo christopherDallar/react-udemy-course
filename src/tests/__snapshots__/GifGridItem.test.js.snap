@@ -4,9 +4,13 @@ exports[`Test on GiftGridItem Component should Match With Snapshot GiftGridItem 
 <div
   className="card animate__animated animate__bounce"
 >
-  <img />
+  <img
+    alt="Un titulo"
+    src="https://localhost/"
+  />
   <p>
      
+    Un titulo
      
   </p>
 </div>
