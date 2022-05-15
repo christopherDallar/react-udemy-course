@@ -6,10 +6,12 @@ export const UiAddCategory = ({ setCategories }) => {
 
 	const handleInputChange = (e) => {
 		setInputValue(e.target.value);
+		console.log('handle input change called', e);
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		console.log('handleSubmit called', e);
 
 		if (inputValue.trim().length > 2) {
 			setCategories((cat) => [inputValue, ...cat]);
@@ -19,7 +21,7 @@ export const UiAddCategory = ({ setCategories }) => {
 
 	return (
 		<form onSubmit={handleSubmit}>
-			<h1>"{inputValue}" (Min 2 length)</h1>
+			<h1>{inputValue}</h1>
 			<input type='text' value={inputValue} onChange={handleInputChange} />
 		</form>
 	);

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test on UiAddCategory Ui Component should Match With Snapshot UiAddCategory Correctly 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <h1 />
+  <input
+    onChange={[Function]}
+    type="text"
+    value=""
+  />
+</form>
+`;
