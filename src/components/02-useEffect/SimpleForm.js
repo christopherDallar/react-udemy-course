@@ -33,7 +33,7 @@ export const SimpleForm = () => {
 
 	return (
 		<>
-			<h1>UseEffect</h1>
+			<h1>UseEffect (Type in input name '123')</h1>
 			<hr />
 
 			<div className='form-group'>
