@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Father } from './components/07-tarea-memo/Father';
 import './index.css';
 // import { HookApp } from './HookApp';
 // import { CounterApp } from './components/01-useState/CounterApp';
@@ -12,7 +13,7 @@ import './index.css';
 // import { Layout } from './components/05-useLayoutEffect/Layout';
 // import { Memorize } from './components/06-memos/Memorize';
 // import { MemoHook } from './components/06-memos/MemoHook';
-import { CallbackHook } from './components/06-memos/CallbackHook';
+// import { CallbackHook } from './components/06-memos/CallbackHook';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<CallbackHook />);
+root.render(<Father />);
