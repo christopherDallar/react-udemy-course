@@ -1,18 +1,65 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { todoReducer } from './todoReducer';
+import { useForm } from './../../hooks/useForm';
 
-const initialState = [
-	{
-		id: new Date().getTime(),
-		desc: 'Learn React',
-		done: false,
-	},
-];
+// const initialState = [
+// 	{
+// 		id: new Date().getTime(),
+// 		desc: 'Learn React',
+// 		done: false,
+// 	},
+// ];
+
+const init = () => {
+	return JSON.parse(localStorage.getItem('todos')) || [];
+
+	// return [
+	// 	{
+	// 		id: new Date().getTime(),
+	// 		desc: 'Learn React',
+	// 		done: false,
+	// 	},
+	// ];
+};
 
 export const TodoApp = () => {
-	const [todos] = useReducer(todoReducer, initialState);
+	const [todos, dispatch] = useReducer(todoReducer, [], init);
 
-	console.log(todos);
+	const [{ description }, handleInputChange, reset] = useForm({
+		description: '',
+	});
+
+	console.log(description);
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		if (description.trim().length < 1) {
+			return;
+		}
+
+		const newTodo = {
+			id: new Date().getTime(),
+			desc: description,
+			done: false,
+		};
+
+		const action = {
+			type: 'add',
+			payload: newTodo,
+		};
+
+		dispatch(action);
+		reset();
+
+		console.log('New issue');
+	};
+
+	useEffect(() => {
+		localStorage.setItem('todos', JSON.stringify(todos));
+
+		console.log(localStorage.getItem('todos'));
+	}, [todos]);
 
 	return (
 		<div className='todoApp'>
@@ -37,15 +84,20 @@ export const TodoApp = () => {
 					<h4>Agregar TODO</h4>
 					<hr />
 
-					<form>
+					<form onSubmit={handleSubmit}>
 						<input
 							type='text'
 							name='description'
 							placeholder='Learn...'
 							className='form-control'
+							value={description}
+							onChange={handleInputChange}
 						/>
 
-						<button className='btn btn-outline-primary mt-1 btn-block'>
+						<button
+							type='submit'
+							className='btn btn-outline-primary mt-1 btn-block'
+						>
 							Add
 						</button>
 					</form>
