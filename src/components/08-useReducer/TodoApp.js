@@ -12,14 +12,6 @@ import { useForm } from './../../hooks/useForm';
 
 const init = () => {
 	return JSON.parse(localStorage.getItem('todos')) || [];
-
-	// return [
-	// 	{
-	// 		id: new Date().getTime(),
-	// 		desc: 'Learn React',
-	// 		done: false,
-	// 	},
-	// ];
 };
 
 export const TodoApp = () => {
@@ -28,8 +20,6 @@ export const TodoApp = () => {
 	const [{ description }, handleInputChange, reset] = useForm({
 		description: '',
 	});
-
-	console.log(description);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -55,6 +45,15 @@ export const TodoApp = () => {
 		console.log('New issue');
 	};
 
+	const handleBtnDelete = (todoId) => {
+		const action = {
+			type: 'delete',
+			payload: todoId,
+		};
+
+		dispatch(action);
+	};
+
 	useEffect(() => {
 		localStorage.setItem('todos', JSON.stringify(todos));
 
@@ -74,7 +73,12 @@ export const TodoApp = () => {
 								<p className='text-center'>
 									{idx + 1}.{todo.desc}
 								</p>
-								<button className='btn btn-danger'>Delete</button>
+								<button
+									className='btn btn-danger'
+									onClick={() => handleBtnDelete(todo.id)}
+								>
+									Delete
+								</button>
 							</li>
 						))}
 					</ul>
