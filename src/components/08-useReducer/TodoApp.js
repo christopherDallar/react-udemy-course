@@ -45,13 +45,20 @@ export const TodoApp = () => {
 		console.log('New issue');
 	};
 
-	const handleBtnDelete = (todoId) => {
+	const handleDelete = (todoId) => {
 		const action = {
 			type: 'delete',
 			payload: todoId,
 		};
 
 		dispatch(action);
+	};
+
+	const handleToggle = (todoId) => {
+		dispatch({
+			type: 'toggle',
+			payload: todoId,
+		});
 	};
 
 	useEffect(() => {
@@ -70,12 +77,15 @@ export const TodoApp = () => {
 					<ul className='list-group list-group-flush'>
 						{todos.map((todo, idx) => (
 							<li className='list-group-item' key={todo.id}>
-								<p className='text-center'>
+								<p
+									className={`${todo.done && 'complete'}`}
+									onClick={() => handleToggle(todo.id)}
+								>
 									{idx + 1}.{todo.desc}
 								</p>
 								<button
 									className='btn btn-danger'
-									onClick={() => handleBtnDelete(todo.id)}
+									onClick={() => handleDelete(todo.id)}
 								>
 									Delete
 								</button>
