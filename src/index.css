@@ -20,3 +20,11 @@ body {
 .complete {
 	text-decoration: line-through;
 }
+
+.navbar.bg-dark a {
+	color: white;
+}
+
+.active {
+	color: rgb(0, 219, 154) !important;
+}
