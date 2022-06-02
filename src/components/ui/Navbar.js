@@ -1,8 +1,12 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 export const Navbar = () => {
+	const navigate = useNavigate();
+
 	const handleLogout = () => {
-		console.log('por hacer');
+		navigate('/login', {
+			replace: true,
+		});
 	};
 
 	return (
@@ -37,11 +41,9 @@ export const Navbar = () => {
 				<ul className='navbar-nav ml-auto'>
 					<span className='nav-item nav-link text-info'>Christopher</span>
 
-					<Link to='/login'>
-						<button className='nav-item nav-link btn' onClick={handleLogout}>
-							Logout
-						</button>
-					</Link>
+					<button className='nav-item nav-link btn' onClick={handleLogout}>
+						Logout
+					</button>
 				</ul>
 			</div>
 		</nav>
