@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Navigate, useParams, useNavigate } from 'react-router-dom';
 import { getHeroesById } from './../../selectors/getHeroById';
 
@@ -6,7 +6,7 @@ export const HeroScreen = () => {
 	const navigate = useNavigate();
 	const { heroId } = useParams();
 
-	const hero = getHeroesById(heroId);
+	const hero = useMemo(() => getHeroesById(heroId), [heroId]); //without useMemo with any change on any use state this request will be execute again
 
 	console.log(heroId);
 
