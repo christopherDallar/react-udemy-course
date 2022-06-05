@@ -1,21 +1,28 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import queryString from 'query-string';
+
 import { useForm } from './../../hooks/useForm';
 import { getHeroesByName } from './../../selectors/getHeroByName';
 import { HeroCard } from './../hero/HeroCard';
 
 export const SearchScreen = () => {
-	const [{ searchText }, handleInputChange, reset] = useForm({
-		searchText: '',
-	});
+	const navigate = useNavigate();
+	const location = useLocation();
 
-	const heroesFiltered = getHeroesByName('hello');
+	// If q doesn't exist in the query string object, set it to an empty string
+	const { q = '' } = queryString.parse(location.search);
+
+	const heroesFiltered = useMemo(() => getHeroesByName(q), [q]);
+
+	const [{ searchText }, handleInputChange] = useForm({
+		searchText: q,
+	});
 
 	const handleSearch = (e) => {
 		e.preventDefault();
 
-		console.log(searchText);
-
-		reset();
+		navigate(`?q=${searchText}`); // Without / it will take the current path and add the query params
 	};
 
 	return (
