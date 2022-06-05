@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { types } from './../../types/types';
+import { AuthContext } from '../../auth/authContext';
 
 export const LoginScreen = () => {
 	const navigate = useNavigate();
+	const { dispatch } = useContext(AuthContext);
 
 	const handleLogin = () => {
-		// navigate('/marvel'); // To push this new history and navigate to route
+		const action = {
+			type: types.login,
+			payload: {
+				name: 'Christopher',
+			},
+		};
+
+		dispatch(action);
+
 		navigate('/marvel', {
-			// If i am in /login then press button navigate to /marvel, but if i press browser back button, it doesn't navigate to login again
-			// it doesn't push this new history and navigate to route
 			replace: true,
 		});
 	};
