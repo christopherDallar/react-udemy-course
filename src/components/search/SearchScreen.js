@@ -6,6 +6,18 @@ import { useForm } from './../../hooks/useForm';
 import { getHeroesByName } from './../../selectors/getHeroByName';
 import { HeroCard } from './../hero/HeroCard';
 
+const ErrorMessage = ({ errorType = '', q = '' }) => (
+	<>
+		{errorType === 'empty' && (
+			<div className='alert alert-info'>Search a heroe</div>
+		)}
+
+		{errorType === 'any' && (
+			<div className='alert alert-danger'>No results "{q}"</div>
+		)}
+	</>
+);
+
 export const SearchScreen = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -54,6 +66,14 @@ export const SearchScreen = () => {
 				<div className='col-7'>
 					<h4>Results</h4>
 					<hr />
+
+					{q === '' ? (
+						<ErrorMessage errorType='empty' />
+					) : (
+						heroesFiltered.length === 0 && (
+							<ErrorMessage errorType='any' q={q} />
+						)
+					)}
 
 					{heroesFiltered.map((hero) => (
 						<HeroCard key={hero.id} {...hero} />
