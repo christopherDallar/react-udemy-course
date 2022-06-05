@@ -6,7 +6,7 @@ export const SearchScreen = () => {
 		searchText: '',
 	});
 
-	const handleSubmit = (e) => {
+	const handleSearch = (e) => {
 		e.preventDefault();
 
 		console.log(searchText);
@@ -23,7 +23,7 @@ export const SearchScreen = () => {
 				<div className='col-5'>
 					<h4>Search</h4>
 
-					<form onSubmit={handleSubmit}>
+					<form onSubmit={handleSearch}>
 						<input
 							type='text'
 							placeholder='Search a hero'
