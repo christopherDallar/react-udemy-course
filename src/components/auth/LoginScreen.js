@@ -2,7 +2,11 @@ import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from './../../hooks/useForm';
-import { checkingAuth, startGoogleSignIn } from '../../store/auth';
+import {
+	AuthStatusEnum,
+	checkingAuth,
+	startGoogleSignIn,
+} from '../../store/auth';
 
 export const LoginScreen = () => {
 	const { status } = useSelector((state) => state.auth);
@@ -13,7 +17,10 @@ export const LoginScreen = () => {
 		password: '123456',
 	});
 
-	const isAuthenticated = useMemo(() => status === 'authenticated', [status]);
+	const isAuthenticated = useMemo(
+		() => status === AuthStatusEnum.authenticated,
+		[status]
+	);
 
 	const onSubmit = (e) => {
 		e.preventDefault();
