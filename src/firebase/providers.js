@@ -25,7 +25,7 @@ export const signInWithGoogle = async () => {
 		// console.log({ credentials });
 	} catch (error) {
 		// Handle Errors here.
-		const errorCode = error.code;
+		// const errorCode = error.code;
 		const errorMessage = error.message;
 
 		// // The email of the user's account used.

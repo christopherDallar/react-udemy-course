@@ -19,9 +19,8 @@ export const LoginScreen = () => {
 	};
 
 	const onGoogleSignIn = (e) => {
-		console.log('onGoogleSignIn');
-
 		console.log({ email, password });
+		console.log('onGoogleSignIn');
 		dispatch(startGoogleSignIn());
 	};
 
