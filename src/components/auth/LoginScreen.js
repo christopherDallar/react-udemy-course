@@ -1,15 +1,19 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from './../../hooks/useForm';
 import { checkingAuth, startGoogleSignIn } from '../../store/auth';
 
 export const LoginScreen = () => {
+	const { status } = useSelector((state) => state.auth);
+
 	const dispatch = useDispatch();
 	const { email, password, onInputChange } = useForm({
 		email: 'christopher@google.com',
 		password: '123456',
 	});
+
+	const isAuthenticated = useMemo(() => status === 'authenticated', [status]);
 
 	const onSubmit = (e) => {
 		e.preventDefault();
@@ -19,7 +23,7 @@ export const LoginScreen = () => {
 	};
 
 	const onGoogleSignIn = (e) => {
-		console.log({ email, password });
+		console.log(isAuthenticated);
 		console.log('onGoogleSignIn');
 		dispatch(startGoogleSignIn());
 	};
@@ -46,14 +50,22 @@ export const LoginScreen = () => {
 					value={password}
 					onChange={onInputChange}
 				/>
-				<button type='submit' className='btn btn-primary btn-block'>
+				<button
+					disabled={isAuthenticated}
+					type='submit'
+					className='btn btn-primary btn-block'
+				>
 					Login
 				</button>
 
 				<div className='auth__social-networks'>
 					<p>Login with social networks</p>
 
-					<div className='google-btn'>
+					<button
+						className='google-btn'
+						disabled={isAuthenticated}
+						onClick={onGoogleSignIn}
+					>
 						<div className='google-icon-wrapper'>
 							<img
 								className='google-icon'
@@ -61,10 +73,9 @@ export const LoginScreen = () => {
 								alt='google button'
 							/>
 						</div>
-						<p className='btn-text' onClick={onGoogleSignIn}>
-							<b>Sign in with google</b>
-						</p>
-					</div>
+
+						<span className='btn-text'>Sign in with google</span>
+					</button>
 
 					<Link to='/auth/register' className='link'>
 						Create new account
