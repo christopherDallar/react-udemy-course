@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from './../../hooks';
 import { InputError } from './../atomic/InputError';
@@ -24,6 +24,8 @@ const formValidations = {
 };
 
 export const RegisterScreen = () => {
+	const [formSubmitted, setFormSubmitted] = useState(false);
+
 	const {
 		formState,
 		displayName,
@@ -31,7 +33,7 @@ export const RegisterScreen = () => {
 		password,
 		passwordConfirm,
 		onInputChange,
-		// isFormValid,
+		isFormValid,
 		displayNameValid,
 		emailValid,
 		passwordValid,
@@ -40,6 +42,7 @@ export const RegisterScreen = () => {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
+		setFormSubmitted(true);
 		console.log(formState);
 	};
 
@@ -50,14 +53,14 @@ export const RegisterScreen = () => {
 			<form onSubmit={onSubmit}>
 				<input
 					type='text'
-					placeholder='name'
+					placeholder='Name'
 					className='auth__input'
 					autoComplete='off'
 					name='displayName'
 					onChange={onInputChange}
 					value={displayName}
 				/>
-				<InputError message={displayNameValid} />
+				<InputError message={formSubmitted && displayNameValid} />
 
 				<input
 					type='email'
@@ -68,7 +71,7 @@ export const RegisterScreen = () => {
 					onChange={onInputChange}
 					value={email}
 				/>
-				<InputError inputName='email' message={emailValid} />
+				<InputError message={formSubmitted && emailValid} />
 
 				<input
 					type='password'
@@ -78,7 +81,7 @@ export const RegisterScreen = () => {
 					onChange={onInputChange}
 					value={password}
 				/>
-				<InputError inputName='password' message={passwordValid} />
+				<InputError message={formSubmitted && passwordValid} />
 
 				<input
 					type='password'
@@ -88,12 +91,13 @@ export const RegisterScreen = () => {
 					onChange={onInputChange}
 					value={passwordConfirm}
 				/>
-				<InputError
-					inputName='passwordConfirm'
-					message={passwordConfirmValid}
-				/>
+				<InputError message={formSubmitted && passwordConfirmValid} />
 
-				<button type='submit' className='btn btn-primary btn-block mb-5 mt-5'>
+				<button
+					type='submit'
+					className='btn btn-primary btn-block mb-5 mt-5'
+					disabled={!isFormValid}
+				>
 					Register
 				</button>
 
