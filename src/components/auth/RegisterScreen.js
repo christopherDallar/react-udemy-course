@@ -7,14 +7,20 @@ const formData = {
 	displayName: 'Christopher Dallar',
 	email: 'christopher@google.com',
 	password: '123456',
-	passwordConfirm: '',
+	passwordConfirm: '123456',
 };
 
-const formErrorMessages = {
-	displayName: 'Campo obligatorio',
-	email: 'Campo obligatorio',
-	password: 'Campo obligatorio',
-	passwordConfirm: 'Campo obligatorio',
+const formValidations = {
+	displayName: [(value) => value.length >= 1, 'DisplayName is required.'],
+	email: [(value) => value.includes('@'), 'Email must to be @.'],
+	password: [
+		(value) => value.length >= 6,
+		'Password must to be at least 6 characters.',
+	],
+	passwordConfirm: [
+		(value, formState) => value === formState['password'],
+		'Passwords is not matching.',
+	],
 };
 
 export const RegisterScreen = () => {
@@ -25,11 +31,12 @@ export const RegisterScreen = () => {
 		password,
 		passwordConfirm,
 		onInputChange,
+		// isFormValid,
 		displayNameValid,
-		isFormValid,
-		EmailValid,
+		emailValid,
 		passwordValid,
-	} = useForm(formData);
+		passwordConfirmValid,
+	} = useForm(formData, formValidations);
 
 	const onSubmit = (e) => {
 		e.preventDefault();
@@ -50,7 +57,7 @@ export const RegisterScreen = () => {
 					onChange={onInputChange}
 					value={displayName}
 				/>
-				<InputError inputName='displayName' messages={displayNameValid} />
+				<InputError message={displayNameValid} />
 
 				<input
 					type='email'
@@ -61,7 +68,7 @@ export const RegisterScreen = () => {
 					onChange={onInputChange}
 					value={email}
 				/>
-				<InputError inputName='email' messages={formErrorMessages} />
+				<InputError inputName='email' message={emailValid} />
 
 				<input
 					type='password'
@@ -71,7 +78,7 @@ export const RegisterScreen = () => {
 					onChange={onInputChange}
 					value={password}
 				/>
-				<InputError inputName='password' messages={formErrorMessages} />
+				<InputError inputName='password' message={passwordValid} />
 
 				<input
 					type='password'
@@ -81,7 +88,10 @@ export const RegisterScreen = () => {
 					onChange={onInputChange}
 					value={passwordConfirm}
 				/>
-				<InputError inputName='passwordConfirm' messages={formErrorMessages} />
+				<InputError
+					inputName='passwordConfirm'
+					message={passwordConfirmValid}
+				/>
 
 				<button type='submit' className='btn btn-primary btn-block mb-5 mt-5'>
 					Register

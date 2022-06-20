@@ -1,9 +1,5 @@
 import React from 'react';
 
-export const InputError = ({ inputName, messages = {} }) => {
-	return (
-		messages[inputName] && (
-			<span className='inputError'>{messages[inputName]}</span>
-		)
-	);
+export const InputError = ({ message }) => {
+	return message && <span className='inputError'>{message}</span>;
 };
