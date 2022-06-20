@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from './../../hooks';
+import { InputError } from './../atomic/InputError';
 
 const formData = {
 	displayName: 'Christopher Dallar',
@@ -9,14 +10,25 @@ const formData = {
 	passwordConfirm: '',
 };
 
+const formErrorMessages = {
+	displayName: 'Campo obligatorio',
+	email: 'Campo obligatorio',
+	password: 'Campo obligatorio',
+	passwordConfirm: 'Campo obligatorio',
+};
+
 export const RegisterScreen = () => {
 	const {
+		formState,
 		displayName,
 		email,
 		password,
 		passwordConfirm,
 		onInputChange,
-		formState,
+		displayNameValid,
+		isFormValid,
+		EmailValid,
+		passwordValid,
 	} = useForm(formData);
 
 	const onSubmit = (e) => {
@@ -38,6 +50,7 @@ export const RegisterScreen = () => {
 					onChange={onInputChange}
 					value={displayName}
 				/>
+				<InputError inputName='displayName' messages={displayNameValid} />
 
 				<input
 					type='email'
@@ -48,6 +61,8 @@ export const RegisterScreen = () => {
 					onChange={onInputChange}
 					value={email}
 				/>
+				<InputError inputName='email' messages={formErrorMessages} />
+
 				<input
 					type='password'
 					placeholder='Password'
@@ -56,6 +71,7 @@ export const RegisterScreen = () => {
 					onChange={onInputChange}
 					value={password}
 				/>
+				<InputError inputName='password' messages={formErrorMessages} />
 
 				<input
 					type='password'
@@ -65,8 +81,9 @@ export const RegisterScreen = () => {
 					onChange={onInputChange}
 					value={passwordConfirm}
 				/>
+				<InputError inputName='passwordConfirm' messages={formErrorMessages} />
 
-				<button type='submit' className='btn btn-primary btn-block mb-5'>
+				<button type='submit' className='btn btn-primary btn-block mb-5 mt-5'>
 					Register
 				</button>
 
