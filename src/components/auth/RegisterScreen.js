@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from './../../hooks';
 import { InputError } from './../atomic/InputError';
+import { useDispatch } from 'react-redux';
+import { startCreatingUserWithEmailAndPassword } from '../../store/auth';
 
 const formData = {
 	displayName: 'Christopher Dallar',
-	email: 'christopher@google.com',
+	email: 'christopher123456@test.com',
 	password: '123456',
 	passwordConfirm: '123456',
 };
@@ -24,6 +26,7 @@ const formValidations = {
 };
 
 export const RegisterScreen = () => {
+	const dispatch = useDispatch();
 	const [formSubmitted, setFormSubmitted] = useState(false);
 
 	const {
@@ -43,6 +46,13 @@ export const RegisterScreen = () => {
 	const onSubmit = (e) => {
 		e.preventDefault();
 		setFormSubmitted(true);
+
+		if (!isFormValid) {
+			return;
+		}
+
+		dispatch(startCreatingUserWithEmailAndPassword(formState));
+
 		console.log(formState);
 	};
 
