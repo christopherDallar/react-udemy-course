@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from './../../hooks';
 import { InputError } from './../atomic/InputError';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { startCreatingUserWithEmailAndPassword } from '../../store/auth';
 
 const formData = {
@@ -28,6 +28,12 @@ const formValidations = {
 export const RegisterScreen = () => {
 	const dispatch = useDispatch();
 	const [formSubmitted, setFormSubmitted] = useState(false);
+
+	const { status, errorMessage } = useSelector((state) => state.auth);
+	const isCheckingAuthentication = useMemo(
+		() => status === 'checking',
+		[status]
+	);
 
 	const {
 		formState,
@@ -103,10 +109,11 @@ export const RegisterScreen = () => {
 				/>
 				<InputError message={formSubmitted && passwordConfirmValid} />
 
+				<InputError message={errorMessage} />
 				<button
 					type='submit'
 					className='btn btn-primary btn-block mb-5 mt-5'
-					disabled={!isFormValid}
+					disabled={!isFormValid || isCheckingAuthentication}
 				>
 					Register
 				</button>
