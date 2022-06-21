@@ -9,7 +9,7 @@ export const AuthStatusEnum = {
 export const authSlice = createSlice({
 	name: 'auth',
 	initialState: {
-		status: AuthStatusEnum.notAuthenticated, // 'not-authenticated', 'authenticated'
+		status: AuthStatusEnum.checking, // 'not-authenticated', 'authenticated'
 		uid: null,
 		email: null,
 		displayName: null,
