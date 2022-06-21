@@ -93,8 +93,6 @@ export const loginWithEmailAndPassword = async ({ email, password }) => {
 
 		const { uid, photoURL, displayName } = resp.user;
 
-		console.log(resp);
-
 		return {
 			ok: true,
 			displayName,
