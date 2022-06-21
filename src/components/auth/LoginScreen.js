@@ -36,11 +36,6 @@ export const LoginScreen = () => {
 		passwordValid,
 	} = useForm(formData, formValidations);
 
-	const isAuthenticated = useMemo(
-		() => status === AuthStatusEnum.authenticated,
-		[status]
-	);
-
 	const isCheckingAuthentication = useMemo(
 		() => status === AuthStatusEnum.checking,
 		[status]
@@ -90,7 +85,7 @@ export const LoginScreen = () => {
 
 				<InputError message={errorMessage} />
 				<button
-					disabled={isAuthenticated || !isFormValid || isCheckingAuthentication}
+					disabled={!isFormValid || isCheckingAuthentication}
 					type='submit'
 					className='btn btn-primary btn-block'
 				>
@@ -100,11 +95,7 @@ export const LoginScreen = () => {
 				<div className='auth__social-networks'>
 					<p>Login with social networks</p>
 
-					<button
-						className='google-btn'
-						disabled={isAuthenticated}
-						onClick={onGoogleSignIn}
-					>
+					<button className='google-btn' onClick={onGoogleSignIn}>
 						<div className='google-icon-wrapper'>
 							<img
 								className='google-icon'
