@@ -2,6 +2,7 @@ import {
 	createUserWithEmailAndPassword,
 	GoogleAuthProvider,
 	signInWithPopup,
+	updateProfile,
 } from 'firebase/auth';
 import { FirebaseAuth } from './config';
 
@@ -58,6 +59,10 @@ export const registerUserWithEmailAndPassword = async ({
 		);
 
 		const { uid, photoURL } = resp.user;
+
+		await updateProfile(FirebaseAuth.currentUser, {
+			displayName,
+		});
 
 		console.log(resp);
 
