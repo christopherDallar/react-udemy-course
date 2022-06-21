@@ -1,37 +1,64 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from './../../hooks/useForm';
 import {
 	AuthStatusEnum,
-	checkingAuth,
 	startGoogleSignIn,
+	startLoginWithEmailAndPassword,
 } from '../../store/auth';
+import { InputError } from '../atomic/InputError';
+
+const formData = {
+	email: 'christopher123456@test.com',
+	password: '123456',
+};
+
+const formValidations = {
+	email: [(value) => value.includes('@'), 'Email must to be @.'],
+	password: [
+		(value) => value.length >= 6,
+		'Password must to be at least 6 characters.',
+	],
+};
 
 export const LoginScreen = () => {
-	const { status } = useSelector((state) => state.auth);
-
+	const { status, errorMessage } = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
-	const { email, password, onInputChange } = useForm({
-		email: 'christopher@google.com',
-		password: '123456',
-	});
+
+	const [formSubmitted, setFormSubmitted] = useState(false);
+	const {
+		email,
+		password,
+		onInputChange,
+		isFormValid,
+		emailValid,
+		passwordValid,
+	} = useForm(formData, formValidations);
 
 	const isAuthenticated = useMemo(
 		() => status === AuthStatusEnum.authenticated,
 		[status]
 	);
 
+	const isCheckingAuthentication = useMemo(
+		() => status === AuthStatusEnum.checking,
+		[status]
+	);
+
 	const onSubmit = (e) => {
 		e.preventDefault();
 
-		console.log({ email, password });
-		dispatch(checkingAuth());
+		setFormSubmitted(true);
+
+		if (!isFormValid) {
+			return;
+		}
+
+		dispatch(startLoginWithEmailAndPassword({ email, password }));
 	};
 
 	const onGoogleSignIn = (e) => {
-		console.log(isAuthenticated);
-		console.log('onGoogleSignIn');
 		dispatch(startGoogleSignIn());
 	};
 
@@ -49,6 +76,8 @@ export const LoginScreen = () => {
 					value={email}
 					onChange={onInputChange}
 				/>
+				<InputError message={formSubmitted && emailValid} />
+
 				<input
 					className='auth__input'
 					type='password'
@@ -57,8 +86,11 @@ export const LoginScreen = () => {
 					value={password}
 					onChange={onInputChange}
 				/>
+				<InputError message={formSubmitted && passwordValid} />
+
+				<InputError message={errorMessage} />
 				<button
-					disabled={isAuthenticated}
+					disabled={isAuthenticated || !isFormValid || isCheckingAuthentication}
 					type='submit'
 					className='btn btn-primary btn-block'
 				>

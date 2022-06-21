@@ -4,6 +4,7 @@ import { useForm } from './../../hooks';
 import { InputError } from './../atomic/InputError';
 import { useDispatch, useSelector } from 'react-redux';
 import { startCreatingUserWithEmailAndPassword } from '../../store/auth';
+import { AuthStatusEnum } from './../../store/auth/authSlice';
 
 const formData = {
 	displayName: 'Christopher Dallar',
@@ -31,7 +32,7 @@ export const RegisterScreen = () => {
 
 	const { status, errorMessage } = useSelector((state) => state.auth);
 	const isCheckingAuthentication = useMemo(
-		() => status === 'checking',
+		() => status === AuthStatusEnum.checking,
 		[status]
 	);
 
