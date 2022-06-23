@@ -1,13 +1,14 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { startLogout } from './../../store/auth/thunks';
 import { JournalEntries } from './JournalEntries';
-import { useDispatch } from 'react-redux';
-import { logout } from '../../store/auth';
 
 export const Sidebar = () => {
 	const dispatch = useDispatch();
+	const { displayName } = useSelector((state) => state.auth);
 
 	const logoutAuth = () => {
-		dispatch(logout({ errorMessage: 'logout' }));
+		dispatch(startLogout());
 	};
 
 	return (
@@ -15,7 +16,7 @@ export const Sidebar = () => {
 			<div className='journal__sidebar-navbar'>
 				<h3 className='mt-5'>
 					<i className='far fa-moon'></i>
-					<span> Fernando</span>
+					<span> {displayName}</span>
 				</h3>
 
 				<button className='btn' onClick={logoutAuth}>

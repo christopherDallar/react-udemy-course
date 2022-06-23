@@ -12,11 +12,19 @@ export const useCheckAuth = () => {
 		onAuthStateChanged(FirebaseAuth, async (user) => {
 			if (!user) {
 				dispatch(logout());
+				console.log('onAuthStateChanged - Logout');
+				return;
 			}
 
 			const { uid, email, displayName, photoURL } = user;
 
 			dispatch(login({ uid, email, displayName, photoURL }));
+			console.log('onAuthStateChanged - Login', {
+				uid,
+				email,
+				displayName,
+				photoURL,
+			});
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
