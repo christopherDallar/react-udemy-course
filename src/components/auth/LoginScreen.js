@@ -61,7 +61,10 @@ export const LoginScreen = () => {
 		<>
 			<h3 className='auth__title'>Login</h3>
 
-			<form onSubmit={onSubmit}>
+			<form
+				onSubmit={onSubmit}
+				className='animate__animated animate__fadeIn animate__faster'
+			>
 				<input
 					autoComplete='off'
 					className='auth__input'
