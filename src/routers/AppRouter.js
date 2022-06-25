@@ -1,10 +1,10 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import { AuthRouter } from './AuthRouter';
-import { JournalScreen } from './../components/journal/JournalScreen';
-import { CheckingAuth } from './../ui/';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { CheckingAuth } from './../components/ui/CheckingAuth';
 import { AuthStatusEnum } from './../store/auth/authSlice';
 import { useCheckAuth } from './../hooks/useCheckAuth';
+import { AuthRoutes } from './../components/auth/routes/AuthRoutes';
+import { JournalRoutes } from './../components/journal/routes/JournalRoutes';
 
 export const AppRouter = () => {
 	const status = useCheckAuth();
@@ -17,12 +17,10 @@ export const AppRouter = () => {
 		<BrowserRouter>
 			<Switch>
 				{status === AuthStatusEnum.authenticated ? (
-					<Route path='/*' component={JournalScreen} />
+					<Route path='/*' component={JournalRoutes} />
 				) : (
-					<Route path='/auth/*' component={AuthRouter} />
+					<Route path='/auth' component={AuthRoutes} />
 				)}
-
-				<Redirect to='/auth/login' />
 			</Switch>
 		</BrowserRouter>
 	);

@@ -2,6 +2,10 @@ export const startNewNote = () => {
 	return async (dispatch) => {
 		// uid
 
+		console.log('====================================');
+		console.log('startNewNote');
+		console.log('====================================');
+
 		const newNote = {
 			title: '',
 			body: '',

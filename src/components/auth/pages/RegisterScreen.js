@@ -1,10 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useForm } from './../../hooks';
-import { InputError } from './../atomic/InputError';
+import { useForm } from './../../../hooks/useForm';
+import { InputError } from './../../atomic/InputError';
 import { useDispatch, useSelector } from 'react-redux';
-import { startCreatingUserWithEmailAndPassword } from '../../store/auth';
-import { AuthStatusEnum } from './../../store/auth/authSlice';
+import { startCreatingUserWithEmailAndPassword } from './../../../store/auth';
+import { AuthStatusEnum } from './../../../store/auth';
 
 const formData = {
 	displayName: 'Christopher Dallar',

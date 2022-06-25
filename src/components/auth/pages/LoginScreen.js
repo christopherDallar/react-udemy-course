@@ -1,13 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useForm } from './../../hooks/useForm';
+import { useForm } from '../../../hooks/useForm';
 import {
 	AuthStatusEnum,
 	startGoogleSignIn,
 	startLoginWithEmailAndPassword,
-} from '../../store/auth';
-import { InputError } from '../atomic/InputError';
+} from '../../../store/auth';
+import { InputError } from '../../atomic/InputError';
 
 const formData = {
 	email: 'christopher123456@test.com',
