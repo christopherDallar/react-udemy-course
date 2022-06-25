@@ -1,7 +1,7 @@
 const { createSlice } = require('@reduxjs/toolkit');
 
 export const journalSlice = createSlice({
-	name: '',
+	name: 'journal',
 	initialState: {
 		isSaving: true,
 		messageSaved: '',
