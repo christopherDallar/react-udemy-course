@@ -2,7 +2,7 @@ import React from 'react';
 import { IconButton } from '@mui/material';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { JournalLayout } from './../layout/JournalLayout';
-import { NoteView, NothingSelectedView } from '../views';
+import { NothingSelectedView } from '../views';
 
 export const JournalScreen = () => {
 	return (
