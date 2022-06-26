@@ -3,20 +3,17 @@ import React from 'react';
 import { JournalLayout } from './../layout/JournalLayout';
 // import { Sidebar } from '../Sidebar';
 // import { NoteScreen } from '../../notes/NoteScreen';
-import { NothingSelectedView } from '../views';
+import { NoteView } from '../views';
 
 export const JournalScreen = () => {
 	return (
 		<JournalLayout>
-			{/* <Sidebar />
-
-			<main>
+			{/* <main>
 				<NoteScreen />
 			</main> */}
 
-			<NothingSelectedView />
-
-			{/* NoteView */}
+			{/* <NothingSelectedView /> */}
+			<NoteView />
 		</JournalLayout>
 	);
 };
