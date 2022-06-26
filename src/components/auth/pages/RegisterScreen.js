@@ -1,11 +1,12 @@
 import React, { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { useForm } from './../../../hooks/useForm';
-import { InputError } from './../../atomic/InputError';
+// import { InputError } from './../../atomic/InputError';
 import { useDispatch, useSelector } from 'react-redux';
 import { startCreatingUserWithEmailAndPassword } from './../../../store/auth';
 import { AuthStatusEnum } from './../../../store/auth';
 import { AuthLayout } from './../layout/AuthLayout';
+import { Grid, TextField, Button, Typography, Link } from '@mui/material';
 
 const formData = {
 	displayName: 'Christopher Dallar',
@@ -66,11 +67,84 @@ export const RegisterScreen = () => {
 
 	return (
 		<>
-			<AuthLayout title='Login'></AuthLayout>
+			<AuthLayout title='Login'>
+				<form onSubmit={onSubmit}>
+					<Grid container>
+						<Grid item xs={12} sx={{ mt: 2 }}>
+							<TextField
+								label='Display Name'
+								type='displayName'
+								placeholder='Christopher Dallar'
+								fullWidth
+								name='displayName'
+								value={displayName}
+								onChange={onInputChange}
+							/>
+						</Grid>
+
+						<Grid item xs={12} sx={{ mt: 2 }}>
+							<TextField
+								label='Email'
+								type='email'
+								placeholder='email@gmail.com'
+								fullWidth
+								name='email'
+								value={email}
+								onChange={onInputChange}
+							/>
+						</Grid>
+
+						<Grid item xs={12} sx={{ mt: 2 }}>
+							<TextField
+								label='Password'
+								type='password'
+								placeholder='password'
+								fullWidth
+								name='password'
+								value={password}
+								onChange={onInputChange}
+							/>
+						</Grid>
+
+						<Grid item xs={12} sx={{ mt: 2 }}>
+							<TextField
+								label='Repeat Password'
+								type='password'
+								placeholder='password'
+								fullWidth
+								name='passwordConfirm'
+								value={passwordConfirm}
+								onChange={onInputChange}
+							/>
+						</Grid>
+
+						<Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
+							<Grid item xs={12}>
+								<Button
+									variant='contained'
+									fullWidth
+									type='submit'
+									disabled={!isFormValid || isCheckingAuthentication}
+								>
+									Sign up
+								</Button>
+							</Grid>
+						</Grid>
+
+						<Grid container direction='row' justifyContent='end'>
+							<Typography sx={{ mr: 1 }}>Already have an account?</Typography>
+							<Link component={RouterLink} color='inherit' to='/auth/login'>
+								Sing in
+							</Link>
+						</Grid>
+					</Grid>
+				</form>
+			</AuthLayout>
 		</>
 	);
 };
 
+// eslint-disable-next-line no-lone-blocks
 {
 	/* <>
 <h3 className='auth__title'>Register</h3>
