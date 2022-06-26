@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { Grid, TextField, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from '../../../hooks/useForm';
@@ -59,62 +60,116 @@ export const LoginScreen = () => {
 
 	return (
 		<>
-			<h3 className='auth__title'>Login</h3>
-
-			<form
-				onSubmit={onSubmit}
-				className='animate__animated animate__fadeIn animate__faster'
+			<Grid
+				container
+				spacing={0}
+				direction='column'
+				alignItems='center'
+				justifyContent='center'
+				sx={{ minHeight: '100vh', backgroundColor: 'primary.main', padding: 4 }}
 			>
-				<input
-					autoComplete='off'
-					className='auth__input'
-					type='email'
-					placeholder='Email'
-					name='email'
-					value={email}
-					onChange={onInputChange}
-				/>
-				<InputError message={formSubmitted && emailValid} />
-
-				<input
-					className='auth__input'
-					type='password'
-					placeholder='Password'
-					name='password'
-					value={password}
-					onChange={onInputChange}
-				/>
-				<InputError message={formSubmitted && passwordValid} />
-
-				<InputError message={errorMessage} />
-				<button
-					disabled={!isFormValid || isCheckingAuthentication}
-					type='submit'
-					className='btn btn-primary btn-block'
+				<Grid
+					item
+					className='box-shadow'
+					xs={3}
+					sx={{ backgroundColor: 'white', padding: 3, borderRadius: 2 }}
 				>
-					Login
-				</button>
+					<Typography variant='h5' sx={{ mb: 1 }}>
+						Login
+					</Typography>
 
-				<div className='auth__social-networks'>
-					<p>Login with social networks</p>
+					<form>
+						<Grid container>
+							<Grid item xs={12} sx={{ mt: 2 }}>
+								<TextField
+									label='Email'
+									type='email'
+									placeholder='email@gmail.com'
+									fullWidth
+								/>
+							</Grid>
 
-					<button className='google-btn' onClick={onGoogleSignIn}>
-						<div className='google-icon-wrapper'>
-							<img
-								className='google-icon'
-								src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg'
-								alt='google button'
-							/>
-						</div>
+							<Grid item xs={12} sx={{ mt: 2 }}>
+								<TextField
+									label='Password'
+									type='password'
+									placeholder='password'
+									fullWidth
+								/>
+							</Grid>
 
-						<span className='btn-text'>Sign in with google</span>
-					</button>
-
-					<Link to='/auth/register' className='link'>
-						Create new account
-					</Link>
-				</div>
-			</form>
+							<Grid item xs={12} sx={{ mt: 2 }}>
+								<TextField
+									label='Password'
+									type='password'
+									placeholder='password'
+									fullWidth
+								/>
+							</Grid>
+						</Grid>
+					</form>
+				</Grid>
+			</Grid>
 		</>
 	);
 };
+
+// eslint-disable-next-line no-lone-blocks
+{
+	/* <h3 className='auth__title'>Login</h3>
+
+<form
+	onSubmit={onSubmit}
+	className='animate__animated animate__fadeIn animate__faster'
+>
+	<input
+		autoComplete='off'
+		className='auth__input'
+		type='email'
+		placeholder='Email'
+		name='email'
+		value={email}
+		onChange={onInputChange}
+	/>
+	<InputError message={formSubmitted && emailValid} />
+
+	<input
+		className='auth__input'
+		type='password'
+		placeholder='Password'
+		name='password'
+		value={password}
+		onChange={onInputChange}
+	/>
+	<InputError message={formSubmitted && passwordValid} />
+
+	<InputError message={errorMessage} />
+	<button
+		disabled={!isFormValid || isCheckingAuthentication}
+		type='submit'
+		className='btn btn-primary btn-block'
+	>
+		Login
+	</button>
+
+	<div className='auth__social-networks'>
+		<p>Login with social networks</p>
+
+		<button className='google-btn' onClick={onGoogleSignIn}>
+			<div className='google-icon-wrapper'>
+				<img
+					className='google-icon'
+					src='https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg'
+					alt='google button'
+				/>
+			</div>
+
+			<span className='btn-text'>Sign in with google</span>
+		</button>
+
+		<Link to='/auth/register' className='link'>
+			Create new account
+		</Link>
+	</div>
+</form> */
+}
