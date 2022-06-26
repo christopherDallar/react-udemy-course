@@ -1,19 +1,28 @@
 import React from 'react';
-// import { Typography } from '@mui/material';
+import { IconButton } from '@mui/material';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { JournalLayout } from './../layout/JournalLayout';
-// import { Sidebar } from '../Sidebar';
-// import { NoteScreen } from '../../notes/NoteScreen';
-import { NoteView } from '../views';
+import { NoteView, NothingSelectedView } from '../views';
 
 export const JournalScreen = () => {
 	return (
 		<JournalLayout>
-			{/* <main>
-				<NoteScreen />
-			</main> */}
+			<NothingSelectedView />
+			{/* <NoteView /> */}
 
-			{/* <NothingSelectedView /> */}
-			<NoteView />
+			<IconButton
+				size='large'
+				sx={{
+					color: 'white',
+					backgroundColor: 'error.main',
+					':hover': { backgroundColor: 'error.main', opacity: 0.9 },
+					position: 'fixed',
+					right: 50,
+					bottom: 50,
+				}}
+			>
+				<AddOutlinedIcon />
+			</IconButton>
 		</JournalLayout>
 	);
 };
