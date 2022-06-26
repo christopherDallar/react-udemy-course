@@ -8,7 +8,7 @@ import {
 	startGoogleSignIn,
 	startLoginWithEmailAndPassword,
 } from '../../../store/auth';
-// import { InputError } from '../../atomic/InputError';
+// import { InputError } from '../../ui/InputError';
 import { Google } from '@mui/icons-material';
 import { AuthLayout } from './../layout/AuthLayout';
 

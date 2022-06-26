@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import { CheckingAuth } from './../components/ui/CheckingAuth';
+import { CheckingAuth } from './../components/ui';
 import { AuthStatusEnum } from './../store/auth/authSlice';
 import { useCheckAuth } from './../hooks/useCheckAuth';
 import { AuthRoutes } from './../components/auth/routes/AuthRoutes';

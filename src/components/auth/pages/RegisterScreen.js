@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { useForm } from './../../../hooks/useForm';
-// import { InputError } from './../../atomic/InputError';
+// import { InputError } from './../../ui/InputError';
 import { useDispatch, useSelector } from 'react-redux';
 import { startCreatingUserWithEmailAndPassword } from './../../../store/auth';
 import { AuthStatusEnum } from './../../../store/auth';
