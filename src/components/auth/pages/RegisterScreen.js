@@ -5,6 +5,7 @@ import { InputError } from './../../atomic/InputError';
 import { useDispatch, useSelector } from 'react-redux';
 import { startCreatingUserWithEmailAndPassword } from './../../../store/auth';
 import { AuthStatusEnum } from './../../../store/auth';
+import { AuthLayout } from './../layout/AuthLayout';
 
 const formData = {
 	displayName: 'Christopher Dallar',
@@ -65,67 +66,73 @@ export const RegisterScreen = () => {
 
 	return (
 		<>
-			<h3 className='auth__title'>Register</h3>
-
-			<form
-				onSubmit={onSubmit}
-				className='animate__animated animate__fadeIn animate__faster'
-			>
-				<input
-					type='text'
-					placeholder='Name'
-					className='auth__input'
-					autoComplete='off'
-					name='displayName'
-					onChange={onInputChange}
-					value={displayName}
-				/>
-				<InputError message={formSubmitted && displayNameValid} />
-
-				<input
-					type='email'
-					placeholder='Email'
-					className='auth__input'
-					autoComplete='off'
-					name='email'
-					onChange={onInputChange}
-					value={email}
-				/>
-				<InputError message={formSubmitted && emailValid} />
-
-				<input
-					type='password'
-					placeholder='Password'
-					className='auth__input'
-					name='password'
-					onChange={onInputChange}
-					value={password}
-				/>
-				<InputError message={formSubmitted && passwordValid} />
-
-				<input
-					type='password'
-					placeholder='Confirm password'
-					className='auth__input'
-					name='passwordConfirm'
-					onChange={onInputChange}
-					value={passwordConfirm}
-				/>
-				<InputError message={formSubmitted && passwordConfirmValid} />
-
-				<InputError message={errorMessage} />
-				<button
-					type='submit'
-					className='btn btn-primary btn-block mb-5 mt-5'
-					disabled={!isFormValid || isCheckingAuthentication}
-				>
-					Register
-				</button>
-
-				<Link to='/auth/login' className='link'>
-					Already registered?
-				</Link>
-			</form>
+			<AuthLayout title='Login'></AuthLayout>
 		</>
 	);
 };
+
+{
+	/* <>
+<h3 className='auth__title'>Register</h3>
+
+<form
+	onSubmit={onSubmit}
+	className='animate__animated animate__fadeIn animate__faster'
+>
+	<input
+		type='text'
+		placeholder='Name'
+		className='auth__input'
+		autoComplete='off'
+		name='displayName'
+		onChange={onInputChange}
+		value={displayName}
+	/>
+	<InputError message={formSubmitted && displayNameValid} />
+
+	<input
+		type='email'
+		placeholder='Email'
+		className='auth__input'
+		autoComplete='off'
+		name='email'
+		onChange={onInputChange}
+		value={email}
+	/>
+	<InputError message={formSubmitted && emailValid} />
+
+	<input
+		type='password'
+		placeholder='Password'
+		className='auth__input'
+		name='password'
+		onChange={onInputChange}
+		value={password}
+	/>
+	<InputError message={formSubmitted && passwordValid} />
+
+	<input
+		type='password'
+		placeholder='Confirm password'
+		className='auth__input'
+		name='passwordConfirm'
+		onChange={onInputChange}
+		value={passwordConfirm}
+	/>
+	<InputError message={formSubmitted && passwordConfirmValid} />
+
+	<InputError message={errorMessage} />
+	<button
+		type='submit'
+		className='btn btn-primary btn-block mb-5 mt-5'
+		disabled={!isFormValid || isCheckingAuthentication}
+	>
+		Register
+	</button>
+
+	<Link to='/auth/login' className='link'>
+		Already registered?
+	</Link>
+</form>
+</> */
+}

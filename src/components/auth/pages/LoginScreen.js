@@ -10,6 +10,7 @@ import {
 } from '../../../store/auth';
 // import { InputError } from '../../atomic/InputError';
 import { Google } from '@mui/icons-material';
+import { AuthLayout } from './../layout/AuthLayout';
 
 const formData = {
 	email: 'christopher123456@test.com',
@@ -65,86 +66,60 @@ export const LoginScreen = () => {
 
 	return (
 		<>
-			<Grid
-				container
-				spacing={0}
-				direction='column'
-				alignItems='center'
-				justifyContent='center'
-				sx={{ minHeight: '100vh', backgroundColor: 'primary.main', padding: 4 }}
-			>
-				<Grid
-					item
-					className='box-shadow'
-					xs={3}
-					sx={{ backgroundColor: 'white', padding: 3, borderRadius: 2 }}
-				>
-					<Typography variant='h5' sx={{ mb: 1 }}>
-						Login
-					</Typography>
+			<AuthLayout title='Login'>
+				<form onSubmit={onSubmit}>
+					<Grid container>
+						<Grid item xs={12} sx={{ mt: 2 }}>
+							<TextField
+								label='Email'
+								type='email'
+								placeholder='email@gmail.com'
+								fullWidth
+								name='email'
+								value={email}
+								onChange={onInputChange}
+							/>
+						</Grid>
 
-					<form onSubmit={onSubmit}>
-						<Grid container>
-							<Grid item xs={12} sx={{ mt: 2 }}>
-								<TextField
-									label='Email'
-									type='email'
-									placeholder='email@gmail.com'
+						<Grid item xs={12} sx={{ mt: 2 }}>
+							<TextField
+								label='Password'
+								type='password'
+								placeholder='password'
+								fullWidth
+								name='password'
+								value={password}
+								onChange={onInputChange}
+							/>
+						</Grid>
+
+						<Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
+							<Grid item xs={12} sm={6}>
+								<Button
+									variant='contained'
 									fullWidth
-									name='email'
-									value={email}
-									onChange={onInputChange}
-								/>
-							</Grid>
-
-							<Grid item xs={12} sx={{ mt: 2 }}>
-								<TextField
-									label='Password'
-									type='password'
-									placeholder='password'
-									fullWidth
-									name='password'
-									value={password}
-									onChange={onInputChange}
-								/>
-							</Grid>
-
-							<Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
-								<Grid item xs={12} sm={6}>
-									<Button
-										variant='contained'
-										fullWidth
-										type='submit'
-										disabled={!isFormValid || isCheckingAuthentication}
-									>
-										Login
-									</Button>
-								</Grid>
-								<Grid item xs={12} sm={6}>
-									<Button
-										variant='contained'
-										fullWidth
-										onClick={onGoogleSignIn}
-									>
-										<Google />
-										<Typography sx={{ ml: 1 }}>Google</Typography>
-									</Button>
-								</Grid>
-							</Grid>
-
-							<Grid container direction='row' justifyContent='end'>
-								<Link
-									component={RouterLink}
-									color='inherit'
-									to='/auth/register'
+									type='submit'
+									disabled={!isFormValid || isCheckingAuthentication}
 								>
-									Sign up new account
-								</Link>
+									Login
+								</Button>
+							</Grid>
+							<Grid item xs={12} sm={6}>
+								<Button variant='contained' fullWidth onClick={onGoogleSignIn}>
+									<Google />
+									<Typography sx={{ ml: 1 }}>Google</Typography>
+								</Button>
 							</Grid>
 						</Grid>
-					</form>
-				</Grid>
-			</Grid>
+
+						<Grid container direction='row' justifyContent='end'>
+							<Link component={RouterLink} color='inherit' to='/auth/register'>
+								Sign up new account
+							</Link>
+						</Grid>
+					</Grid>
+				</form>
+			</AuthLayout>
 		</>
 	);
 };
