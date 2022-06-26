@@ -1,17 +1,22 @@
 import React from 'react';
-import { Sidebar } from '../Sidebar';
-import { NoteScreen } from '../../notes/NoteScreen';
+import { Typography } from '@mui/material';
+import { JournalLayout } from './../layout/JournalLayout';
+// import { Sidebar } from '../Sidebar';
+// import { NoteScreen } from '../../notes/NoteScreen';
 
 export const JournalScreen = () => {
 	return (
-		<div className='journal__main-content animate__animated animate__fadeIn animate__faster'>
-			<Sidebar />
+		<JournalLayout>
+			{/* <Sidebar />
 
 			<main>
-				{/* <NothingSelected /> */}
-
 				<NoteScreen />
-			</main>
-		</div>
+			</main> */}
+
+			<Typography>sss</Typography>
+
+			{/* NothingSelected */}
+			{/* NoteView */}
+		</JournalLayout>
 	);
 };
