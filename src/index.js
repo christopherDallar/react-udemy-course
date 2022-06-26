@@ -2,10 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { store } from './store';
 import { Provider } from 'react-redux';
-
 import { JournalApp } from './JournalApp';
 import 'animate.css';
-import './styles/styles.scss';
+import './styles.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
