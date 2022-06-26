@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
-import { Grid, TextField, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Button, Grid, Link, TextField, Typography } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from '../../../hooks/useForm';
 import {
@@ -8,7 +8,8 @@ import {
 	startGoogleSignIn,
 	startLoginWithEmailAndPassword,
 } from '../../../store/auth';
-import { InputError } from '../../atomic/InputError';
+// import { InputError } from '../../atomic/InputError';
+import { Google } from '@mui/icons-material';
 
 const formData = {
 	email: 'christopher123456@test.com',
@@ -98,13 +99,28 @@ export const LoginScreen = () => {
 								/>
 							</Grid>
 
-							<Grid item xs={12} sx={{ mt: 2 }}>
-								<TextField
-									label='Password'
-									type='password'
-									placeholder='password'
-									fullWidth
-								/>
+							<Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
+								<Grid item xs={12} sm={6}>
+									<Button variant='contained' fullWidth>
+										Login
+									</Button>
+								</Grid>
+								<Grid item xs={12} sm={6}>
+									<Button variant='contained' fullWidth>
+										<Google />
+										<Typography sx={{ ml: 1 }}>Google</Typography>
+									</Button>
+								</Grid>
+							</Grid>
+
+							<Grid container direction='row' justifyContent='end'>
+								<Link
+									component={RouterLink}
+									color='inherit'
+									to='/auth/register'
+								>
+									Sign up new account
+								</Link>
 							</Grid>
 						</Grid>
 					</form>
