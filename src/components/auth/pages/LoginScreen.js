@@ -1,5 +1,12 @@
 import React, { useMemo, useState } from 'react';
-import { Button, Grid, Link, TextField, Typography } from '@mui/material';
+import {
+	Alert,
+	Button,
+	Grid,
+	Link,
+	TextField,
+	Typography,
+} from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from '../../../hooks/useForm';
@@ -8,7 +15,6 @@ import {
 	startGoogleSignIn,
 	startLoginWithEmailAndPassword,
 } from '../../../store/auth';
-// import { InputError } from '../../ui/InputError';
 import { Google } from '@mui/icons-material';
 import { AuthLayout } from './../layout/AuthLayout';
 
@@ -29,18 +35,14 @@ export const LoginScreen = () => {
 	const { status, errorMessage } = useSelector((state) => state.auth);
 	const dispatch = useDispatch();
 
-	const [
-		,
-		// formSubmitted,
-		setFormSubmitted,
-	] = useState(false);
+	const [formSubmitted, setFormSubmitted] = useState(false);
 	const {
 		email,
 		password,
 		onInputChange,
 		isFormValid,
-		// emailValid,
-		// passwordValid,
+		emailValid,
+		passwordValid,
 	} = useForm(formData, formValidations);
 
 	const isCheckingAuthentication = useMemo(
@@ -78,6 +80,8 @@ export const LoginScreen = () => {
 								name='email'
 								value={email}
 								onChange={onInputChange}
+								error={!!emailValid && formSubmitted}
+								helperText={emailValid}
 							/>
 						</Grid>
 
@@ -90,7 +94,13 @@ export const LoginScreen = () => {
 								name='password'
 								value={password}
 								onChange={onInputChange}
+								error={!!passwordValid && formSubmitted}
+								helperText={passwordValid}
 							/>
+						</Grid>
+
+						<Grid item xs={12} display={!!errorMessage ? '' : 'none'}>
+							<Alert severity='error'>{errorMessage}</Alert>
 						</Grid>
 
 						<Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
@@ -99,13 +109,18 @@ export const LoginScreen = () => {
 									variant='contained'
 									fullWidth
 									type='submit'
-									disabled={!isFormValid || isCheckingAuthentication}
+									disabled={isCheckingAuthentication}
 								>
 									Login
 								</Button>
 							</Grid>
 							<Grid item xs={12} sm={6}>
-								<Button variant='contained' fullWidth onClick={onGoogleSignIn}>
+								<Button
+									variant='contained'
+									fullWidth
+									onClick={onGoogleSignIn}
+									disabled={isCheckingAuthentication}
+								>
 									<Google />
 									<Typography sx={{ ml: 1 }}>Google</Typography>
 								</Button>

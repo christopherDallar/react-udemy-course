@@ -6,7 +6,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { startCreatingUserWithEmailAndPassword } from './../../../store/auth';
 import { AuthStatusEnum } from './../../../store/auth';
 import { AuthLayout } from './../layout/AuthLayout';
-import { Grid, TextField, Button, Typography, Link } from '@mui/material';
+import {
+	Grid,
+	TextField,
+	Button,
+	Typography,
+	Link,
+	Alert,
+} from '@mui/material';
 
 const formData = {
 	displayName: 'Christopher Dallar',
@@ -79,6 +86,8 @@ export const RegisterScreen = () => {
 								name='displayName'
 								value={displayName}
 								onChange={onInputChange}
+								error={!!displayNameValid && formSubmitted}
+								helperText={displayNameValid}
 							/>
 						</Grid>
 
@@ -91,6 +100,8 @@ export const RegisterScreen = () => {
 								name='email'
 								value={email}
 								onChange={onInputChange}
+								error={!!emailValid && formSubmitted}
+								helperText={emailValid}
 							/>
 						</Grid>
 
@@ -103,6 +114,8 @@ export const RegisterScreen = () => {
 								name='password'
 								value={password}
 								onChange={onInputChange}
+								error={!!passwordValid && formSubmitted}
+								helperText={passwordValid}
 							/>
 						</Grid>
 
@@ -115,7 +128,13 @@ export const RegisterScreen = () => {
 								name='passwordConfirm'
 								value={passwordConfirm}
 								onChange={onInputChange}
+								error={!!passwordConfirmValid && formSubmitted}
+								helperText={passwordConfirmValid}
 							/>
+						</Grid>
+
+						<Grid item xs={12} display={!!errorMessage ? '' : 'none'}>
+							<Alert severity='error'>{errorMessage}</Alert>
 						</Grid>
 
 						<Grid container spacing={2} sx={{ mb: 2, mt: 1 }}>
@@ -124,7 +143,7 @@ export const RegisterScreen = () => {
 									variant='contained'
 									fullWidth
 									type='submit'
-									disabled={!isFormValid || isCheckingAuthentication}
+									disabled={isCheckingAuthentication}
 								>
 									Sign up
 								</Button>
