@@ -13,6 +13,7 @@ export const PokemonApp = () => {
 
 	useEffect(() => {
 		dispatch(getPokemons());
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
