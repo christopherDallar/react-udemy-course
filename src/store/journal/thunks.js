@@ -1,18 +1,12 @@
 import { collection, doc, setDoc } from 'firebase/firestore/lite';
 import { FirebaseDB } from './../../firebase/config';
+import { addNewEmptyNote, setActiveNote, savingNewNote } from './';
 
 export const startNewNote = () => {
 	return async (dispatch, getState) => {
-		// uid
+		dispatch(savingNewNote());
 
 		const { uid } = getState().auth;
-		console.log('====================================');
-		console.log(getState());
-		console.log('====================================');
-
-		console.log('====================================');
-		console.log('startNewNote');
-		console.log('====================================');
 
 		const newNote = {
 			title: '',
@@ -23,8 +17,9 @@ export const startNewNote = () => {
 		const newDoc = doc(collection(FirebaseDB, `${uid}/journal/notes`));
 		await setDoc(newDoc, newNote);
 
-		// dispatch
-		// dispatch( newNote )
-		// dispatch( activarNote )
+		newNote.id = newDoc.id;
+
+		dispatch(addNewEmptyNote(newNote));
+		dispatch(setActiveNote(newNote));
 	};
 };
