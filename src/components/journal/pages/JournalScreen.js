@@ -18,8 +18,6 @@ export const JournalScreen = () => {
 		<JournalLayout>
 			{!!active ? <NoteView /> : <NothingSelectedView />}
 
-			{/* <NoteView /> */}
-
 			<IconButton
 				disabled={isSaving}
 				onClick={onClickNewNote}
