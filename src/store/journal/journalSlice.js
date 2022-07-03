@@ -30,7 +30,13 @@ export const journalSlice = createSlice({
 			state.isSaving = false;
 		},
 		setActiveNote: (state, { payload }) => {
-			state.active = payload;
+			console.log(payload);
+			state.active = {
+				id: payload.id,
+				title: payload.title,
+				body: payload.body,
+				date: payload.date,
+			};
 		},
 		setNotes: (state, { payload }) => {
 			console.log(payload);
