@@ -1,5 +1,12 @@
 const { createSlice } = require('@reduxjs/toolkit');
 
+const noteFormat = (note) => ({
+	id: note.id,
+	title: note.title,
+	body: note.body,
+	date: note.date,
+});
+
 export const journalSlice = createSlice({
 	name: 'journal',
 	initialState: {
@@ -20,17 +27,11 @@ export const journalSlice = createSlice({
 			state.isSaving = true;
 		},
 		addNewEmptyNote: (state, { payload }) => {
-			state.notes.push({
-				id: payload.id,
-				title: payload.title,
-				body: payload.body,
-				date: payload.date,
-			});
+			state.notes.push(noteFormat(payload));
 
 			state.isSaving = false;
 		},
 		setActiveNote: (state, { payload }) => {
-			console.log(payload);
 			state.active = {
 				id: payload.id,
 				title: payload.title,
@@ -39,16 +40,20 @@ export const journalSlice = createSlice({
 			};
 		},
 		setNotes: (state, { payload }) => {
-			console.log(payload);
-			state.notes = payload.map((note) => ({
-				id: note.id,
-				title: note.title,
-				body: note.body,
-				date: note.date,
-			}));
+			state.notes = payload.map((note) => noteFormat(note));
 		},
-		setSaving: (state) => {},
-		updateNote: (state, action) => {},
+		setSaving: (state) => {
+			state.isSaving = true;
+			// Show error message
+		},
+		updatedNote: (state, { payload }) => {
+			state.isSaving = false;
+			state.notes = state.notes.map((note) =>
+				payload.id === note.id ? noteFormat(payload) : note
+			);
+
+			// Show updated message
+		},
 		deleteNoteById: (state, action) => {},
 	},
 });
@@ -60,5 +65,5 @@ export const {
 	setActiveNote,
 	setNotes,
 	setSaving,
-	updateNote,
+	updatedNote,
 } = journalSlice.actions;
