@@ -38,13 +38,16 @@ export const journalSlice = createSlice({
 				body: payload.body,
 				date: payload.date,
 			};
+
+			state.messageSaved = '';
 		},
 		setNotes: (state, { payload }) => {
 			state.notes = payload.map((note) => noteFormat(note));
 		},
 		setSaving: (state) => {
 			state.isSaving = true;
-			// Show error message
+
+			state.messageSaved = '';
 		},
 		updatedNote: (state, { payload }) => {
 			state.isSaving = false;
@@ -52,7 +55,7 @@ export const journalSlice = createSlice({
 				payload.id === note.id ? noteFormat(payload) : note
 			);
 
-			// Show updated message
+			state.messageSaved = `${payload.title}, updated`;
 		},
 		deleteNoteById: (state, action) => {},
 	},
