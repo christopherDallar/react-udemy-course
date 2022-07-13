@@ -33,7 +33,7 @@ export const NoteView = () => {
 		dispatch(setActiveNote(formState));
 		// console.log('effec', formState);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [formState]);
+	}, [body, title, date]);
 
 	useEffect(() => {
 		if (messageSaved.length > 0) {
@@ -120,7 +120,7 @@ export const NoteView = () => {
 				/>
 			</Grid>
 
-			<ImageGallery />
+			<ImageGallery imgUrls={note.imageUrls} />
 		</Grid>
 	);
 };

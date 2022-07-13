@@ -5,6 +5,7 @@ const noteFormat = (note) => ({
 	title: note.title,
 	body: note.body,
 	date: note.date,
+	imageUrls: note.imageUrls && note.imageUrls.length > 0 ? note.imageUrls : [],
 });
 
 export const journalSlice = createSlice({
@@ -32,12 +33,7 @@ export const journalSlice = createSlice({
 			state.isSaving = false;
 		},
 		setActiveNote: (state, { payload }) => {
-			state.active = {
-				id: payload.id,
-				title: payload.title,
-				body: payload.body,
-				date: payload.date,
-			};
+			state.active = noteFormat(payload);
 
 			state.messageSaved = '';
 		},
@@ -57,6 +53,11 @@ export const journalSlice = createSlice({
 
 			state.messageSaved = `${payload.title}, updated`;
 		},
+		setPhotosToActiveNote: (state, { payload }) => {
+			state.active.imageUrls = [...payload];
+
+			state.isSaving = false;
+		},
 		deleteNoteById: (state, action) => {},
 	},
 });
@@ -69,4 +70,5 @@ export const {
 	setNotes,
 	setSaving,
 	updatedNote,
+	setPhotosToActiveNote,
 } = journalSlice.actions;
