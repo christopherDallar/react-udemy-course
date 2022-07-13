@@ -7,11 +7,13 @@ import { ImageGallery } from './../components';
 import { useForm } from './../../../hooks';
 import {
 	setActiveNote,
+	startDeletingNote,
 	startSaveNote,
 	startUploadingFiles,
 } from '../../../store/journal';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 export const NoteView = () => {
 	const dispatch = useDispatch();
@@ -50,6 +52,10 @@ export const NoteView = () => {
 			return;
 		}
 		dispatch(startUploadingFiles(target.files));
+	};
+
+	const onDelete = () => {
+		dispatch(startDeletingNote());
 	};
 
 	return (
@@ -118,6 +124,13 @@ export const NoteView = () => {
 					value={body}
 					onChange={onInputChange}
 				/>
+			</Grid>
+
+			<Grid container justifyContent='end'>
+				<Button onClick={onDelete} sx={{ mt: 2 }} color='error'>
+					<DeleteOutlineIcon />
+					Delete
+				</Button>
 			</Grid>
 
 			<ImageGallery imgUrls={note.imageUrls} />
