@@ -1,9 +1,9 @@
 import React from 'react';
-import { Navbar } from '../';
-import { Calendar } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { addHours } from 'date-fns';
+import { Calendar } from 'react-big-calendar';
 import { localizer, getMessagesES } from './../../helpers';
+import { Navbar, CalendarEvent } from '../';
 
 const events = [
 	{
@@ -21,7 +21,7 @@ const events = [
 
 export const CalendarPage = () => {
 	const eventStyleGetter = (event, start, end, isSelected) => {
-		console.log({ event, start, end, isSelected });
+		// console.log({ event, start, end, isSelected });
 
 		const style = {
 			backgroundColor: '#347cf7',
@@ -48,6 +48,9 @@ export const CalendarPage = () => {
 				style={{ height: 'calc(100vh - 80px)' }}
 				messages={getMessagesES()}
 				eventPropGetter={eventStyleGetter}
+				components={{
+					event: CalendarEvent,
+				}}
 			/>
 		</>
 	);
