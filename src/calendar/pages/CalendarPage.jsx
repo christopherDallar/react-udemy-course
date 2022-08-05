@@ -4,24 +4,11 @@ import { addHours } from 'date-fns'
 import { Calendar } from 'react-big-calendar'
 import { localizer, getMessagesES } from './../../helpers'
 import { Navbar, CalendarEvent, CalendarModal } from '../'
-import { useUiStore } from '../../hooks'
-
-const events = [
-  {
-    title: 'Birthday boss',
-    notes: 'Buy the cake',
-    start: new Date(),
-    end: addHours(new Date(), 2),
-    bgColor: '#fafafa',
-    user: {
-      _id: '123',
-      name: 'Dallar',
-    },
-  },
-]
+import { useCalendarStore, useUiStore } from '../../hooks'
 
 export const CalendarPage = () => {
   const { openDateModal } = useUiStore()
+  const { events } = useCalendarStore()
   const [lastView, setLastView] = useState(
     localStorage.getItem('lastView') || 'week',
   )
