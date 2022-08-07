@@ -41,12 +41,24 @@ export const calendarSlice = createSlice({
       state.activeEvent = newEvent(payload)
     },
     onAddNewEvent: (state, { payload }) => {
-      console.log({ payload })
       state.events.push(newEvent(payload)) // Si es bien visto hacer push aquí
       state.activeEvent = null
       // state.events = [...state.events, newEvent(payload)]
     },
+    onUpdateEvent: (state, { payload }) => {
+      state.events = state.events.map((event) => {
+        if (event._id === payload._id) {
+          return payload
+        }
+        return event
+      })
+      state.activeEvent = null
+    },
   },
 })
 
-export const { onSetActiveEvent, onAddNewEvent } = calendarSlice.actions
+export const {
+  onSetActiveEvent,
+  onAddNewEvent,
+  onUpdateEvent,
+} = calendarSlice.actions
