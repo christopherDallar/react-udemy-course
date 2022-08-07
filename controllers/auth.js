@@ -1,17 +1,18 @@
 const { response } = require('express') // just for keep intellisense
+const { validationResult } = require('express-validator')
 
 // express.response = just for keep intellisense
 const createUser = (req, res = response) => {
-  const { name, email, password } = req.body
-
-  // Not call more than one time res.json for each callback controller
-  // for that write return for each several res.json choices
-  if (name.length < 5) {
+  // Manage errors
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
     return res.status(400).json({
       ok: false,
-      msg: 'The name must to be more than 5 length',
+      errors: errors.mapped(),
     })
   }
+
+  const { name, email, password } = req.body
 
   res.status(201).json({
     ok: true,
@@ -23,6 +24,14 @@ const createUser = (req, res = response) => {
 }
 
 const loginUser = (req, res = response) => {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      ok: false,
+      errors: errors.mapped(),
+    })
+  }
+
   const { email, password } = req.body
   res.json({
     ok: true,
