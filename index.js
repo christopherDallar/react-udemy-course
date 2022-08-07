@@ -9,11 +9,7 @@ const app = express()
 app.use(express.static('public'))
 
 // Routes
-// app.get('/', (red, res) => {
-//   res.json({
-//     ok: true,
-//   })
-// })
+app.use('/api/auth', require('./routes/auth'))
 
 app.listen(process.env.PORT, 'localhost', () => {
   console.log(`server running on port ${process.env.PORT}`)
