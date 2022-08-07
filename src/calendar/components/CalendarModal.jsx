@@ -31,7 +31,7 @@ const initialsFormValues = {
 
 export const CalendarModal = () => {
   const { isDateModalOpen, closeDateModal } = useUiStore()
-  const { activeEvent } = useCalendarStore()
+  const { activeEvent, startSavingEvent } = useCalendarStore()
 
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [formValues, setFormValues] = useState(initialsFormValues)
@@ -47,7 +47,7 @@ export const CalendarModal = () => {
     if (activeEvent !== null) {
       setFormValues({ ...activeEvent })
     }
-  }, [])
+  }, [activeEvent])
 
   const onInputChanged = ({ target }) => {
     setFormValues({ ...formValues, [target.name]: target.value })
@@ -57,7 +57,7 @@ export const CalendarModal = () => {
     setFormValues({ ...formValues, [changing]: event })
   }
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault()
     setFormSubmitted(true)
 
@@ -72,8 +72,11 @@ export const CalendarModal = () => {
     if (!formValues.title) {
       return
     }
-    console.log(difference)
+
     console.log(formValues)
+    await startSavingEvent(formValues)
+    closeDateModal()
+    setFormSubmitted(false)
   }
 
   return (

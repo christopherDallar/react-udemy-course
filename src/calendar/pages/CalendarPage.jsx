@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import { Calendar } from 'react-big-calendar'
 import { localizer, getMessagesES } from './../../helpers'
-import { Navbar, CalendarEvent, CalendarModal } from '../'
+import { Navbar, CalendarEvent, CalendarModal, FabAddNew } from '../'
 import { useCalendarStore, useUiStore } from '../../hooks'
 
 export const CalendarPage = () => {
@@ -63,6 +63,7 @@ export const CalendarPage = () => {
         onView={onViewChanged}
       />
       <CalendarModal />
+      <FabAddNew />
     </>
   )
 }
