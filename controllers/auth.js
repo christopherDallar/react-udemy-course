@@ -1,17 +1,9 @@
+// https://www.restapitutorial.com/httpstatuscodes.html
 const { response } = require('express') // just for keep intellisense
 const { validationResult } = require('express-validator')
 
 // express.response = just for keep intellisense
 const createUser = (req, res = response) => {
-  // Manage errors
-  const errors = validationResult(req)
-  if (!errors.isEmpty()) {
-    return res.status(400).json({
-      ok: false,
-      errors: errors.mapped(),
-    })
-  }
-
   const { name, email, password } = req.body
 
   res.status(201).json({
@@ -24,14 +16,6 @@ const createUser = (req, res = response) => {
 }
 
 const loginUser = (req, res = response) => {
-  const errors = validationResult(req)
-  if (!errors.isEmpty()) {
-    return res.status(400).json({
-      ok: false,
-      errors: errors.mapped(),
-    })
-  }
-
   const { email, password } = req.body
   res.json({
     ok: true,
