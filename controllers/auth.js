@@ -4,16 +4,25 @@ const User = require('../models/User')
 
 // express.response = just for keep intellisense
 const createUser = async (req, res = response) => {
-  // const { name, email, password } = req.body
-
-  const user = new User(req.body) // Automatically mongoose ignore all data not declare on model
+  const { email, password } = req.body
 
   try {
+    let user = await User.findOne({ email })
+
+    if (user) {
+      return res.status(400).json({
+        ok: false,
+        msg: 'Account already exist with that email',
+      })
+    }
+
+    user = new User(req.body) // Automatically mongoose ignore all data not declare on model
     await user.save()
 
     res.status(201).json({
       ok: true,
-      msg: 'register',
+      uid: user.id,
+      name: user.name,
       // name,
       // email,
       // password,
