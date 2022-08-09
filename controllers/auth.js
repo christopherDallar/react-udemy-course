@@ -40,14 +40,44 @@ const createUser = async (req, res = response) => {
   }
 }
 
-const loginUser = (req, res = response) => {
+const loginUser = async (req, res = response) => {
   const { email, password } = req.body
-  res.json({
-    ok: true,
-    msg: 'login',
-    email,
-    password,
-  })
+
+  try {
+    let user = await User.findOne({ email })
+
+    if (!user) {
+      return res.status(401).json({
+        ok: false,
+        msg:
+          "Email or Password are wrong (For developer: It's the email wrong)",
+      })
+    }
+
+    const validPassword = bcrypt.compareSync(password, user.password)
+
+    if (!validPassword) {
+      return res.status(401).json({
+        ok: false,
+        msg:
+          "Email or Password are wrong (For developer: It's the password wrong)",
+      })
+    }
+
+    // TODO: generate JWT
+
+    res.status(200).json({
+      ok: false,
+      uid: user.id,
+      name: user.name,
+    })
+  } catch (error) {
+    console.log(error)
+    res.json({
+      ok: false,
+      msg: 'Please contact with support',
+    })
+  }
 }
 
 const renewToken = (req, res = response) => {
