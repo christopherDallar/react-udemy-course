@@ -2,6 +2,7 @@
 const { response } = require('express') // just for keep intellisense
 const bcrypt = require('bcryptjs')
 const User = require('../models/User')
+const { generateJWT } = require('../helpers/jwt')
 
 // express.response = just for keep intellisense
 const createUser = async (req, res = response) => {
@@ -26,10 +27,14 @@ const createUser = async (req, res = response) => {
     // Create user
     await user.save()
 
+    // Generate token
+    const token = await generateJWT(user.id, user.name)
+
     res.status(201).json({
       ok: true,
       uid: user.id,
       name: user.name,
+      token,
     })
   } catch (error) {
     console.log(error)
@@ -64,12 +69,14 @@ const loginUser = async (req, res = response) => {
       })
     }
 
-    // TODO: generate JWT
+    // Generate token
+    const token = await generateJWT(user.id, user.name)
 
     res.status(200).json({
       ok: false,
       uid: user.id,
       name: user.name,
+      token,
     })
   } catch (error) {
     console.log(error)
