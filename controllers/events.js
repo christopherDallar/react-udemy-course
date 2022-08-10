@@ -1,4 +1,5 @@
 const { response } = require('express')
+const Event = require('../models/Event')
 
 const getEvents = (req, res = response) => {
   res.json({
@@ -7,7 +8,17 @@ const getEvents = (req, res = response) => {
   })
 }
 
-const getEvent = (req, res = response) => {
+const getEvent = async (req, res = response) => {
+  // try {
+  //   const {} = req
+  //   // await Event.findOne({})
+
+  // } catch (error) {
+
+  // }
+
+  // console.log();
+
   res.json({
     ok: true,
     msg: 'getEvent',
