@@ -1,3 +1,9 @@
+/**
+ * Event Routes
+ * /api/events
+ *
+ */
+
 const { Router } = require('express')
 const { validateJWT } = require('../middleware/jwt-validator')
 const {
