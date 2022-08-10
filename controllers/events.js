@@ -48,7 +48,7 @@ const deleteEvent = (req, res = response) => {
 
 module.exports = {
   getEvents,
-  getEvent,
+  // getEvent,
   createEvent,
   updateEvent,
   deleteEvent,
