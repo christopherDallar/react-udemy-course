@@ -87,11 +87,22 @@ const loginUser = async (req, res = response) => {
   }
 }
 
-const renewToken = (req, res = response) => {
-  res.json({
-    ok: true,
-    msg: 'renew',
-  })
+const renewToken = async (req, res = response) => {
+  try {
+    const { uid, name } = req
+    const token = await generateJWT(uid, name)
+
+    res.json({
+      ok: true,
+      token,
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      ok: false,
+      msg: 'Please contact with support',
+    })
+  }
 }
 
 module.exports = {
