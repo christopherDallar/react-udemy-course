@@ -25,13 +25,25 @@ const getEvent = async (req, res = response) => {
   })
 }
 
-const createEvent = (req, res = response) => {
+const createEvent = async (req, res = response) => {
   console.log(req.body)
 
-  res.json({
-    ok: true,
-    msg: 'createEvent',
-  })
+  const event = new Event(req.body)
+
+  try {
+    event.user = req.uid
+    const eventSaved = await event.save()
+
+    res.json({
+      ok: true,
+      event: eventSaved,
+    })
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      msg: 'Please contact with support',
+    })
+  }
 }
 
 const updateEvent = (req, res = response) => {
