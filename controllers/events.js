@@ -1,4 +1,5 @@
 const { response } = require('express')
+const globalRes = require('../helpers/globalResponse')
 const Event = require('../models/Event')
 
 const getEvents = async (req, res = response) => {
@@ -47,11 +48,44 @@ const createEvent = async (req, res = response) => {
   }
 }
 
-const updateEvent = (req, res = response) => {
-  res.json({
-    ok: true,
-    msg: 'updateEvent',
-  })
+const updateEvent = async (req, res = response) => {
+  const eventId = req.params.id
+  const uid = req.uid
+
+  try {
+    const event = await Event.findById(eventId)
+
+    if (!event) {
+      res.status(404).json({
+        ok: false,
+        msg: 'Event not found by id',
+      })
+    }
+
+    if (event.user.toString() !== uid) {
+      return res.status(401).json({
+        ok: false,
+        mgs: 'Denied edit, it does not privileges to edit this event',
+      })
+    }
+
+    const newEvent = {
+      ...req.body,
+      user: uid,
+    }
+
+    const eventUpdated = await Event.findByIdAndUpdate(eventId, newEvent, {
+      new: true,
+    })
+
+    res.json({
+      ok: true,
+      event: eventUpdated,
+    })
+  } catch (error) {
+    console.log(error)
+    globalRes.error.internal(res)
+  }
 }
 
 const deleteEvent = (req, res = response) => {

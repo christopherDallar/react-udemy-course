@@ -35,7 +35,15 @@ router.post(
 
 // router.get('/:id', getEvent)
 
-router.put('/:id', updateEvent)
+router.put(
+  '/:id',
+  [
+    check('title', 'title is required').not().isEmpty(),
+    check('start', 'start date is required').custom(isDate),
+    validateFields,
+  ],
+  updateEvent,
+)
 
 router.delete('/:id', deleteEvent)
 
