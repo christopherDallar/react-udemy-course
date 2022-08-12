@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "4e0d754d-031e-4726-a814-fe7ffb2f4409",
+		"_postman_id": "8572cba7-94c5-4bfc-a86f-84e53814191f",
 		"name": "React Udemy Fernando",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20414354"
+		"_exporter_id": "8057604"
 	},
 	"item": [
 		{
@@ -289,7 +289,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"title\": \"Boss birthday\",\n    \"start\": 0,\n    \"end\": 1000000,\n    \"notes\": \"Buy cake\",\n    \"ABC\": \"123\"\n}",
+									"raw": "{\n    \"title\": \"Boss birthday 332\",\n    \"start\": 0,\n    \"end\": 1000000,\n    \"notes\": \"Buy cakedsa\",\n    \"ABC\": \"123\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -316,8 +316,17 @@
 							"request": {
 								"method": "PUT",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"title\": \"Boss birthday update hello worl\",\n    \"start\": 0,\n    \"end\": 1000000,\n    \"notes\": \"Buy hello world it new\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
-									"raw": "localhost:4000/api/events/321312",
+									"raw": "localhost:4000/api/events/62f43afc6b364862903d91f6",
 									"host": [
 										"localhost"
 									],
@@ -325,7 +334,7 @@
 									"path": [
 										"api",
 										"events",
-										"321312"
+										"62f43afc6b364862903d91f6"
 									]
 								}
 							},
@@ -337,7 +346,7 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "localhost:4000/api/events/321312",
+									"raw": "localhost:4000/api/events/62f62263e45f93c714d3d935",
 									"host": [
 										"localhost"
 									],
@@ -345,7 +354,7 @@
 									"path": [
 										"api",
 										"events",
-										"321312"
+										"62f62263e45f93c714d3d935"
 									]
 								}
 							},
@@ -414,7 +423,7 @@
 	"variable": [
 		{
 			"key": "x-token",
-			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MmYzM2MyYmE4NjlhNjA5ZDIxNDRhZjEiLCJuYW1lIjoiY2hyaSIsImlhdCI6MTY2MDEwOTk2OSwiZXhwIjoxNjYwMTE3MTY5fQ.LHEwZF0uvvxAa4oS-BZbjtDYQudVciXjnRv5xuaJJ7s"
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MmYzM2MyYmE4NjlhNjA5ZDIxNDRhZjEiLCJuYW1lIjoiY2hyaSIsImlhdCI6MTY2MDI5NTQ2MywiZXhwIjoxNjYwMzAyNjYzfQ.kTr6dBbEAnAuXole9gizMvmhB7nU_5ULZLpdtsjEpCQ"
 		}
 	]
 }
