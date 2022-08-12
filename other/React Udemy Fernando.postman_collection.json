@@ -170,11 +170,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:4000/api/auth/new",
+									"raw": "{{host}}/api/auth/new",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
-									"port": "4000",
 									"path": [
 										"api",
 										"auth",
@@ -199,11 +198,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:4000/api/auth",
+									"raw": "{{host}}/api/auth",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
-									"port": "4000",
 									"path": [
 										"api",
 										"auth"
@@ -224,11 +222,10 @@
 									}
 								],
 								"url": {
-									"raw": "localhost:4000/api/auth/renew",
+									"raw": "{{host}}/api/auth/renew",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
-									"port": "4000",
 									"path": [
 										"api",
 										"auth",
@@ -249,11 +246,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:4000/api/events",
+									"raw": "{{host}}/api/events",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
-									"port": "4000",
 									"path": [
 										"api",
 										"events"
@@ -268,11 +264,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "localhost:4000/api/events/321312",
+									"raw": "{{host}}/api/events/321312",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
-									"port": "4000",
 									"path": [
 										"api",
 										"events",
@@ -297,11 +292,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:4000/api/events/",
+									"raw": "{{host}}/api/events/",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
-									"port": "4000",
 									"path": [
 										"api",
 										"events",
@@ -326,11 +320,10 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:4000/api/events/62f43afc6b364862903d91f6",
+									"raw": "{{host}}/api/events/62f43afc6b364862903d91f6",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
-									"port": "4000",
 									"path": [
 										"api",
 										"events",
@@ -346,11 +339,10 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "localhost:4000/api/events/62f62263e45f93c714d3d935",
+									"raw": "{{host}}/api/events/62f62263e45f93c714d3d935",
 									"host": [
-										"localhost"
+										"{{host}}"
 									],
-									"port": "4000",
 									"path": [
 										"api",
 										"events",
