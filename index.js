@@ -22,6 +22,11 @@ app.use('/api/auth', require('./routes/auth'))
 app.use('/api/events', require('./routes/events'))
 
 // process.env.PORT = if this variable doesn't in server, it will find in .env
-app.listen(process.env.PORT, 'localhost', () => {
-  console.log(`server running on port ${process.env.PORT}`)
+// app.listen(process.env.PORT, 'localhost', () => {
+//   console.log(`server running on port ${process.env.PORT}`)
+// })
+
+const server = app.listen(process.env.PORT || 5000, () => {
+  const port = server.address().port
+  console.log(`Express is working on port ${port}`)
 })
