@@ -1,13 +1,13 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { LoginPage } from './../auth'
-import { CalendarPage } from './../calendar'
-import { getEnvVariables } from '../helpers'
+import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { LoginPage } from './../auth';
+import { CalendarPage } from './../calendar';
+import { authStatus as authStatusEnum, getEnvVariables } from '../helpers';
 
 export const AppRouter = () => {
-  const authStatus = 'authenticated' // 'not-authenticated', 'authenticated'
+  const authStatus = authStatusEnum.notAuthenticated; // 'not-authenticated', 'authenticated'
 
-  console.log(getEnvVariables())
+  console.log(getEnvVariables());
 
   return (
     <BrowserRouter>
@@ -23,5 +23,5 @@ export const AppRouter = () => {
         <Route path="/*" element={<Navigate to="/auth/login" />} />
       </Routes>
     </BrowserRouter>
-  )
-}
+  );
+};
