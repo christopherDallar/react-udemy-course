@@ -7,7 +7,6 @@ export const useAuthStore = () => {
   const dispatch = useDispatch();
 
   const startLogin = async ({ email, password }) => {
-    console.log({ email, password });
     dispatch(onChecking());
     try {
       // calendarApi
@@ -23,7 +22,7 @@ export const useAuthStore = () => {
 
       dispatch(onLogin({ uid, name }));
 
-      console.log({ resp });
+      // console.log({ resp });
     } catch (error) {
       dispatch(onLogout('Wrong credentials'));
       setTimeout(() => {
