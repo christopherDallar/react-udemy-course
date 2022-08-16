@@ -4,13 +4,13 @@ import { authStatus } from '../../helpers';
 export const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    status: 'checking', // authenticate, not authenticated
+    status: authStatus.checking, // authenticate, not authenticated
     user: {},
     errorMessage: undefined,
   },
   reducers: {
     onChecking: (state) => {
-      state.status = 'checking';
+      state.status = authStatus.checking;
       state.user = {};
       state.errorMessage = undefined;
     },
@@ -19,7 +19,20 @@ export const authSlice = createSlice({
       state.user = payload;
       state.errorMessage = undefined;
     },
+    onLogout: (state, { payload }) => {
+      state.status = authStatus.notAuthenticated;
+      state.user = {};
+      state.errorMessage = payload;
+    },
+    clearErrorMessage: (state) => {
+      state.errorMessage = undefined;
+    },
   },
 });
 
-export const { onChecking, onLogin } = authSlice.actions;
+export const {
+  onChecking,
+  onLogin,
+  onLogout,
+  clearErrorMessage,
+} = authSlice.actions;

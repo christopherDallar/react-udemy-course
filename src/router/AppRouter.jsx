@@ -8,8 +8,6 @@ import { useAuthStore } from '../hooks';
 export const AppRouter = () => {
   const { status } = useAuthStore();
 
-  console.log(getEnvVariables());
-
   return (
     <BrowserRouter>
       <Routes>
