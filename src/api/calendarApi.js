@@ -1,6 +1,5 @@
+import axios from 'axios';
 import { getEnvVariables } from '../helpers/getEnvVariables';
-
-const { axios } = require('axios');
 
 const { VITE_API_URL } = getEnvVariables();
 

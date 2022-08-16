@@ -1,6 +1,6 @@
 const authStatus = {
   checking: 'checking',
-  authenticate: 'authenticate',
+  authenticated: 'authenticated',
   notAuthenticated: 'not authenticated',
 };
 
