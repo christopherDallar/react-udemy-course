@@ -1,71 +1,58 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { addHours } from 'date-fns'
-
-const tempEvents = {
-  _id: new Date().getTime(),
-  title: 'from slice Birthday boss',
-  notes: 'Buy the cake',
-  start: new Date(),
-  end: addHours(new Date(), 2),
-  bgColor: '#fafafa',
-  user: {
-    _id: '123',
-    name: 'Dallar',
-  },
-}
+import { createSlice } from '@reduxjs/toolkit';
+import { addHours } from 'date-fns';
 
 const newEvent = (payload) => {
-  const { _id, title, notes, start, end, bgColor, user } = payload
+  const { id, title, notes, start, end, bgColor, user } = payload;
   return {
-    _id,
+    id,
     title,
     notes,
     start,
     end,
     bgColor,
     user: {
-      _id: user._id,
+      uid: user.uid,
       name: user.name,
     },
-  }
-}
+  };
+};
 
 export const calendarSlice = createSlice({
   name: 'calendar',
   initialState: {
-    events: [tempEvents],
+    events: [],
     activeEvent: null,
   },
   reducers: {
     onSetActiveEvent: (state, { payload }) => {
-      state.activeEvent = newEvent(payload)
+      state.activeEvent = newEvent(payload);
     },
     onAddNewEvent: (state, { payload }) => {
-      state.events.push(newEvent(payload)) // Si es bien visto hacer push aquí
-      state.activeEvent = null
+      state.events.push(newEvent(payload)); // Si es bien visto hacer push aquí
+      state.activeEvent = null;
       // state.events = [...state.events, newEvent(payload)]
     },
     onUpdateEvent: (state, { payload }) => {
       state.events = state.events.map((event) => {
-        if (event._id === payload._id) {
-          return payload
+        if (event.id === payload.id) {
+          return payload;
         }
-        return event
-      })
-      state.activeEvent = null
+        return event;
+      });
+      state.activeEvent = null;
     },
     onDeleteEvent: (state) => {
       state.events = state.events.filter(
-        (event) => event._id !== state.activeEvent._id,
-      )
-      state.activeEvent = null
+        (event) => event.id !== state.activeEvent.id
+      );
+      state.activeEvent = null;
     },
   },
-})
+});
 
 export const {
   onSetActiveEvent,
   onAddNewEvent,
   onUpdateEvent,
   onDeleteEvent,
-} = calendarSlice.actions
+} = calendarSlice.actions;
