@@ -2,6 +2,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import calendarApi from '../api/calendarApi';
 import { clearErrorMessage, onChecking, onLogin, onLogout } from '../store';
 
+const internalLogin = (data, dispatch) => {
+  const { uid, token, name } = data;
+
+  localStorage.setItem('token', token);
+  localStorage.setItem('token-init-date', new Date().getTime());
+
+  dispatch(onLogin({ uid, name }));
+};
+
+const internalLogout = (dispatch) => {
+  localStorage.clear();
+  dispatch(onLogout());
+};
+
 export const useAuthStore = () => {
   const { status, user, errorMessage } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -15,12 +29,14 @@ export const useAuthStore = () => {
         password,
       });
 
-      const { uid, token, name } = data;
+      // const { uid, token, name } = data;
 
-      localStorage.setItem('token', token);
-      localStorage.setItem('token-init-date', new Date().getTime());
+      // localStorage.setItem('token', token);
+      // localStorage.setItem('token-init-date', new Date().getTime());
 
-      dispatch(onLogin({ uid, name }));
+      // dispatch(onLogin({ uid, name }));
+
+      internalLogin(data, dispatch);
 
       // console.log({ resp });
     } catch (error) {
@@ -69,17 +85,18 @@ export const useAuthStore = () => {
       console.log(data);
 
       // New login
-      const { uid, token, name } = data;
-
-      localStorage.setItem('token', token);
-      localStorage.setItem('token-init-date', new Date().getTime());
-
-      dispatch(onLogin({ uid, name }));
+      internalLogin(data, dispatch);
     } catch (error) {
       console.log(error);
-      localStorage.clear();
-      dispatch(onLogout());
+      // localStorage.clear();
+      // dispatch(onLogout());
+
+      internalLogout(dispatch);
     }
+  };
+
+  const startLogout = () => {
+    internalLogout(dispatch);
   };
 
   return {
@@ -92,5 +109,6 @@ export const useAuthStore = () => {
     startLogin,
     startRegister,
     checkAuthToken,
+    startLogout,
   };
 };
