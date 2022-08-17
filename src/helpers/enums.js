@@ -1,7 +1,7 @@
-const authStatus = {
+const authStatusEnum = {
   checking: 'checking',
   authenticated: 'authenticated',
   notAuthenticated: 'not-authenticated',
 };
 
-export { authStatus };
+export { authStatusEnum };
