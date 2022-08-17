@@ -21,14 +21,16 @@ export const AppRouter = () => {
     <BrowserRouter>
       <Routes>
         {status !== authStatusEnum.authenticated ? (
-          <Route path="/auth/*" element={<LoginPage />} />
+          <>
+            <Route path="/auth/*" element={<LoginPage />} />
+            <Route path="/*" element={<Navigate to="/auth/login" />} />
+          </>
         ) : (
-          <Route path="/*" element={<CalendarPage />} />
+          <>
+            <Route path="/" element={<CalendarPage />} />
+            <Route path="/*" element={<Navigate to="/" />} />
+          </>
         )}
-
-        {/* <Route path='/*' element={<CalendarPage />} /> */}
-
-        <Route path="/*" element={<Navigate to="/auth/login" />} />
       </Routes>
     </BrowserRouter>
   );
