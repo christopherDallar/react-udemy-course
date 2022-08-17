@@ -50,11 +50,10 @@ export const useAuthStore = () => {
       dispatch(onLogin({ uid, name: data.name }));
     } catch (error) {
       console.log(error);
-      // const { data } = error.response;
-      // dispatch(onLogout(data.msg));
-      // setTimeout(() => {
-      //   dispatch(clearErrorMessage());
-      // }, 10);
+      dispatch(onLogout(error.response.data?.msg || ''));
+      setTimeout(() => {
+        dispatch(clearErrorMessage());
+      }, 10);
     }
   };
 
