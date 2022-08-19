@@ -1,16 +1,22 @@
-import React, { useState } from 'react'
-import 'react-big-calendar/lib/css/react-big-calendar.css'
-import { Calendar } from 'react-big-calendar'
-import { localizer, getMessagesES } from './../../helpers'
-import { Navbar, CalendarEvent, CalendarModal, FabAddNew, FabDelete } from '../'
-import { useCalendarStore, useUiStore } from '../../hooks'
+import React, { useEffect, useState } from 'react';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import { Calendar } from 'react-big-calendar';
+import { localizer, getMessagesES } from './../../helpers';
+import {
+  Navbar,
+  CalendarEvent,
+  CalendarModal,
+  FabAddNew,
+  FabDelete,
+} from '../';
+import { useCalendarStore, useUiStore } from '../../hooks';
 
 export const CalendarPage = () => {
-  const { openDateModal } = useUiStore()
-  const { events, activeEvent, setActiveEvent } = useCalendarStore()
+  const { openDateModal } = useUiStore();
+  const { events, setActiveEvent, startLoadingEvents } = useCalendarStore();
   const [lastView, setLastView] = useState(
-    localStorage.getItem('lastView') || 'week',
-  )
+    localStorage.getItem('lastView') || 'week'
+  );
 
   const eventStyleGetter = (event, start, end, isSelected) => {
     // console.log({ event, start, end, isSelected });
@@ -20,26 +26,30 @@ export const CalendarPage = () => {
       borderRadius: '0px',
       opacity: 0.8,
       color: 'white',
-    }
+    };
 
     return {
       style,
-    }
-  }
+    };
+  };
 
   const onDoubleClick = (event) => {
-    openDateModal()
-  }
+    openDateModal();
+  };
 
   const onSelect = (calendarEvent) => {
-    console.log('Event selected', calendarEvent)
-    setActiveEvent(calendarEvent)
-  }
+    console.log('Event selected', calendarEvent);
+    setActiveEvent(calendarEvent);
+  };
 
   const onViewChanged = (event) => {
-    localStorage.setItem('lastView', event)
-    setLastView(event)
-  }
+    localStorage.setItem('lastView', event);
+    setLastView(event);
+  };
+
+  useEffect(() => {
+    startLoadingEvents();
+  }, []);
 
   return (
     <>
@@ -66,5 +76,5 @@ export const CalendarPage = () => {
       <FabAddNew />
       <FabDelete />
     </>
-  )
-}
+  );
+};

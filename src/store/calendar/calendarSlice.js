@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addHours } from 'date-fns';
 
 const newEvent = (payload) => {
   const { id, title, notes, start, end, bgColor, user } = payload;
@@ -9,9 +8,9 @@ const newEvent = (payload) => {
     notes,
     start,
     end,
-    bgColor,
+    bgColor: '',
     user: {
-      uid: user.uid,
+      uid: user._id,
       name: user.name,
     },
   };
@@ -47,6 +46,12 @@ export const calendarSlice = createSlice({
       );
       state.activeEvent = null;
     },
+    onSetEvents: (state, { payload = [] }) => {
+      console.log({ payload });
+      console.log('objects');
+      console.log(payload.map((event) => newEvent(event)));
+      state.events = payload;
+    },
   },
 });
 
@@ -55,4 +60,5 @@ export const {
   onAddNewEvent,
   onUpdateEvent,
   onDeleteEvent,
+  onSetEvents,
 } = calendarSlice.actions;
