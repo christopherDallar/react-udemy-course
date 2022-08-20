@@ -1,6 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import calendarApi from '../api/calendarApi';
-import { clearErrorMessage, onChecking, onLogin, onLogout } from '../store';
+import {
+  clearErrorMessage,
+  onChecking,
+  onLogin,
+  onLogout,
+  onLogoutCalendar,
+} from '../store';
 
 const internalLogin = (data, dispatch) => {
   const { uid, token, name } = data;
@@ -96,6 +102,7 @@ export const useAuthStore = () => {
   };
 
   const startLogout = () => {
+    dispatch(onLogoutCalendar());
     internalLogout(dispatch);
   };
 
