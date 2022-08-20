@@ -19,6 +19,7 @@ const newEvent = (payload) => {
 export const calendarSlice = createSlice({
   name: 'calendar',
   initialState: {
+    isLoadingEvents: true,
     events: [],
     activeEvent: null,
   },
@@ -46,11 +47,17 @@ export const calendarSlice = createSlice({
       );
       state.activeEvent = null;
     },
-    onSetEvents: (state, { payload = [] }) => {
-      console.log({ payload });
-      console.log('objects');
-      console.log(payload.map((event) => newEvent(event)));
-      state.events = payload;
+    onLoadEvents: (state, { payload = [] }) => {
+      // console.log();
+      state.isLoadingEvents = false;
+      // state.events = payload.map((event) => newEvent(event));
+      payload.forEach((event) => {
+        const exist = state.events.some((dbEvent) => dbEvent.id === event.id);
+
+        if (!exist) {
+          state.events.push(event);
+        }
+      });
     },
   },
 });
@@ -60,5 +67,5 @@ export const {
   onAddNewEvent,
   onUpdateEvent,
   onDeleteEvent,
-  onSetEvents,
+  onLoadEvents,
 } = calendarSlice.actions;

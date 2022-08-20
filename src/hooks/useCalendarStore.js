@@ -5,7 +5,7 @@ import {
   onAddNewEvent,
   onDeleteEvent,
   onSetActiveEvent,
-  onSetEvents,
+  onLoadEvents,
   onUpdateEvent,
 } from '../store/';
 
@@ -45,7 +45,7 @@ export const useCalendarStore = () => {
       const events = convertEventsToDateEvents(data.events);
       console.log('startLoadingEvents', events);
 
-      dispatch(onSetEvents(events));
+      dispatch(onLoadEvents(events));
     } catch (error) {
       console.log('Error loading events', error);
     }
