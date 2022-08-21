@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  HashRouter,
+} from 'react-router-dom';
 import { LoginPage } from './../auth';
 import { CalendarPage } from './../calendar';
 import { authStatusEnum } from '../helpers';
@@ -19,19 +25,23 @@ export const AppRouter = () => {
 
   return (
     <BrowserRouter>
-      <Routes>
-        {status !== authStatusEnum.authenticated ? (
-          <>
-            <Route path="/auth/*" element={<LoginPage />} />
-            <Route path="/*" element={<Navigate to="/auth/login" />} />
-          </>
-        ) : (
-          <>
-            <Route path="/" element={<CalendarPage />} />
-            <Route path="/*" element={<Navigate to="/" />} />
-          </>
-        )}
-      </Routes>
+      // Added # to route //{' '}
+      <HashRouter>
+        <Routes>
+          {status !== authStatusEnum.authenticated ? (
+            <>
+              <Route path="/auth/*" element={<LoginPage />} />
+              <Route path="/*" element={<Navigate to="/auth/login" />} />
+            </>
+          ) : (
+            <>
+              <Route path="/" element={<CalendarPage />} />
+              <Route path="/*" element={<Navigate to="/" />} />
+            </>
+          )}
+        </Routes>
+        //{' '}
+      </HashRouter>
     </BrowserRouter>
   );
 };
