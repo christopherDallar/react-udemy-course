@@ -21,6 +21,10 @@ app.use(express.json())
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/events', require('./routes/events'))
 
+app.get('*', (red, res) => {
+  res.sendFile(__dirname + '/public/index.html')
+})
+
 // process.env.PORT = if this variable doesn't in server, it will find in .env
 // app.listen(process.env.PORT, 'localhost', () => {
 //   console.log(`server running on port ${process.env.PORT}`)
