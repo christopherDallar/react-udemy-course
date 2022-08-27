@@ -12,6 +12,9 @@ export const ViewGiftExpert = () => {
     // setCategories(categories);
     // console.log(categories);
     console.log(newCategory);
+
+    if (categories.includes(newCategory)) return;
+
     setCategories([newCategory, ...categories]); // no muta el estado
   };
 
