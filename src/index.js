@@ -4,9 +4,11 @@ import './index.css';
 import 'animate.css';
 import { ViewGiftExpert } from './views/GiftExpert.view';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(
+  document.getElementById('root'),
+);
 root.render(
-	// <React.StrictMode>
-	<ViewGiftExpert />
-	// </React.StrictMode>
+  <React.StrictMode>
+    <ViewGiftExpert />
+  </React.StrictMode>,
 );
