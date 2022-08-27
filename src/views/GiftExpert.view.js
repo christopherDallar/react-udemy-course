@@ -7,21 +7,24 @@ export const ViewGiftExpert = () => {
     'One punch',
   ]);
 
-  const onAddCategory = () => {
+  const onAddCategory = (newCategory) => {
     // categories.push('valorant');
     // setCategories(categories);
-
-    setCategories([...categories, 'valorant']); // no muta el estado
-    console.log(categories);
+    // console.log(categories);
+    console.log(newCategory);
+    setCategories([newCategory, ...categories]); // no muta el estado
   };
 
   return (
     <>
       <h1>GiftExpertApp</h1>
-      <UiAddCategory setCategories={setCategories} />
+      <UiAddCategory
+        onNewCategory={(value) => onAddCategory(value)}
+        // setCategories={setCategories}
+      />
       <hr></hr>
 
-      <button onClick={onAddCategory}>Add</button>
+      {/* <button onClick={onAddCategory}>Add</button> */}
 
       <ol>
         {categories.map((cat, i) => (
