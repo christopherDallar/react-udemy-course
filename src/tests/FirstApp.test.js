@@ -26,11 +26,6 @@ describe('Test on FirstApp Component', () => {
   //   expect(wrapper).toMatchSnapshot(); // To Save the literal rendered component and compare with wrapper if you press 'u' update the snapshot
   // });
 
-  test('has to math with snapshot', () => {
-    const regard = 'Hello, I am Goku';
-    render(<FirstApp regard={'sdsa'} />);
-  });
-
   test('should show Firts App Correctly', () => {
     const regard = 'Hello, I am Goku';
     const subtitle = 'I am subtitle';
@@ -42,5 +37,28 @@ describe('Test on FirstApp Component', () => {
     const textParagraph = wrapper.find('.subtitle').text();
 
     expect(textParagraph).toBe(subtitle);
+  });
+
+  // updated with render method
+  test('has to math with snapshot', () => {
+    const regard = 'Hello, I am Goku';
+    const { container } = render(
+      <FirstApp regard={regard} />,
+    );
+
+    expect(container).toMatchSnapshot();
+  });
+
+  test('must to show title on h1 tag', () => {
+    const regard = 'Hello, I am Goku';
+    const { container, getByText } = render(
+      <FirstApp regard={regard} />,
+    );
+    expect(getByText(regard)).toBeTruthy(); // Valid if it is found
+
+    const h1 = container.querySelector('h1');
+
+    // expect(h1.innerHTML).toBe(regard); // Not ignore white space
+    expect(h1.innerHTML).toContain(regard); // Ignore white space
   });
 });
