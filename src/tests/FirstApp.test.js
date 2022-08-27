@@ -3,6 +3,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import FirstApp from './../components/FirstApp';
+import { render } from '@testing-library/react';
 
 describe('Test on FirstApp Component', () => {
   // test('should show "Hello, I am Goku" ', () => {
@@ -24,6 +25,11 @@ describe('Test on FirstApp Component', () => {
 
   //   expect(wrapper).toMatchSnapshot(); // To Save the literal rendered component and compare with wrapper if you press 'u' update the snapshot
   // });
+
+  test('has to math with snapshot', () => {
+    const regard = 'Hello, I am Goku';
+    render(<FirstApp regard={'sdsa'} />);
+  });
 
   test('should show Firts App Correctly', () => {
     const regard = 'Hello, I am Goku';
