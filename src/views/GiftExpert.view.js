@@ -1,22 +1,20 @@
-import { React, useState } from 'react';
-import { UiAddCategory } from '../shared/components/ui/UiAddCategory.component';
-import { GifGrid } from './../shared/components/gif/GifGrid.component';
+import { React, useState } from 'react'
+import { UiAddCategory } from '../shared/components/ui/UiAddCategory.component'
+import { GifGrid } from './../shared/components/gif/GifGrid.component'
 
 export const ViewGiftExpert = () => {
-  const [categories, setCategories] = useState([
-    'One punch',
-  ]);
+  const [categories, setCategories] = useState(['One punch'])
 
   const onAddCategory = (newCategory) => {
     // categories.push('valorant');
     // setCategories(categories);
     // console.log(categories);
-    console.log(newCategory);
+    console.log(newCategory)
 
-    if (categories.includes(newCategory)) return;
+    if (categories.includes(newCategory)) return
 
-    setCategories([newCategory, ...categories]); // no muta el estado
-  };
+    setCategories([newCategory, ...categories]) // no muta el estado
+  }
 
   return (
     <>
@@ -36,5 +34,5 @@ export const ViewGiftExpert = () => {
         ))}
       </ol>
     </>
-  );
-};
+  )
+}

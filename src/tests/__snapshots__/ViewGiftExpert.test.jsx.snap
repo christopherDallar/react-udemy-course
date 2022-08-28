@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing <ViewGiftExpert /> should math with snapshot 1`] = `
+<div>
+  <h1>
+    GiftExpertApp
+  </h1>
+  <form
+    role="myForm"
+  >
+    <h1 />
+    <input
+      type="text"
+      value=""
+    />
+  </form>
+  <hr />
+  <ol>
+    <h3
+      class="animate__animated animate__fadeIn"
+    >
+      One punch
+    </h3>
+    <p
+      class="animate__animated animate__flash"
+    >
+      Loading
+    </p>
+    <div
+      class="card-grid"
+    />
+  </ol>
+</div>
+`;
