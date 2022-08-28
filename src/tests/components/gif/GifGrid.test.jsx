@@ -1,8 +1,8 @@
+import { GifGrid } from '../../../shared/components/gif/GifGrid.component'
 const { render, screen } = require('@testing-library/react')
-const { GifGrid } = require('../shared/components/gif/GifGrid.component')
-const { useFetchGifs } = require('../shared/hooks/useFetchGifs')
+const { useFetchGifs } = require('../../../shared/hooks/useFetchGifs')
 
-jest.mock('../shared/hooks/useFetchGifs')
+jest.mock('../../../shared/hooks/useFetchGifs')
 
 describe('Testing <GrifGrid />', () => {
   const category = 'One Punch'
