@@ -14,14 +14,14 @@ export const UiAddCategory = ({ onNewCategory }) => {
 
     const newInputValue = inputValue.trim();
 
-    if (newInputValue.length > 2) {
-      onNewCategory(newInputValue);
-      setInputValue('');
-    }
+    if (newInputValue.length <= 1) return;
+
+    setInputValue('');
+    onNewCategory(newInputValue);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} role="myForm">
       <h1>{inputValue}</h1>
       <input
         type="text"

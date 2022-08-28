@@ -3,6 +3,7 @@
 exports[`Test on UiAddCategory Ui Component should Match With Snapshot UiAddCategory Correctly 1`] = `
 <form
   onSubmit={[Function]}
+  role="myForm"
 >
   <h1 />
   <input
