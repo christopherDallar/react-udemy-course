@@ -1,7 +1,8 @@
-import React, { useEffect, useReducer } from 'react';
-import { todoReducer } from './todoReducer';
-import { TodoList } from './atomic/TodoList';
-import { TodoAdd } from './atomic/TodoAdd';
+import React, { useEffect } from 'react'
+
+import { TodoList } from './atomic/TodoList'
+import { TodoAdd } from './atomic/TodoAdd'
+import { useTodo } from '../../hooks/useTodo'
 
 // const initialState = [
 // 	{
@@ -12,57 +13,34 @@ import { TodoAdd } from './atomic/TodoAdd';
 // ];
 
 const init = () => {
-	return JSON.parse(localStorage.getItem('todos')) || [];
-};
+  return JSON.parse(localStorage.getItem('todos')) || []
+}
 
 export const TodoApp = () => {
-	const [todos, dispatch] = useReducer(todoReducer, [], init);
+  const { todos, handleDelete, handleToggle, handleAddTodo } = useTodo(init)
 
-	const handleDelete = (todoId) => {
-		const action = {
-			type: 'delete',
-			payload: todoId,
-		};
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos))
+  }, [todos])
 
-		dispatch(action);
-	};
+  return (
+    <div className="todoApp">
+      <h1>TodoApp ( {todos.length} )</h1>
+      <hr />
 
-	const handleToggle = (todoId) => {
-		dispatch({
-			type: 'toggle',
-			payload: todoId,
-		});
-	};
+      <div className="row">
+        <div className="col-7">
+          <TodoList
+            todos={todos}
+            handleDelete={handleDelete}
+            handleToggle={handleToggle}
+          />
+        </div>
 
-	const handleAddTodo = (newTodo) => {
-		dispatch({
-			type: 'add',
-			payload: newTodo,
-		});
-	};
-
-	useEffect(() => {
-		localStorage.setItem('todos', JSON.stringify(todos));
-	}, [todos]);
-
-	return (
-		<div className='todoApp'>
-			<h1>TodoApp ( {todos.length} )</h1>
-			<hr />
-
-			<div className='row'>
-				<div className='col-7'>
-					<TodoList
-						todos={todos}
-						handleDelete={handleDelete}
-						handleToggle={handleToggle}
-					/>
-				</div>
-
-				<div className='col-5'>
-					<TodoAdd handleAddTodo={handleAddTodo} />
-				</div>
-			</div>
-		</div>
-	);
-};
+        <div className="col-5">
+          <TodoAdd handleAddTodo={handleAddTodo} />
+        </div>
+      </div>
+    </div>
+  )
+}
