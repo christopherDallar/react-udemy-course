@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { TodoList } from './atomic/TodoList'
 import { TodoAdd } from './atomic/TodoAdd'
-import { useTodo } from '../../hooks/useTodo'
+import { useTodos } from '../../hooks/useTodos'
 
 // const initialState = [
 // 	{
@@ -12,20 +12,22 @@ import { useTodo } from '../../hooks/useTodo'
 // 	},
 // ];
 
-const init = () => {
-  return JSON.parse(localStorage.getItem('todos')) || []
-}
-
 export const TodoApp = () => {
-  const { todos, handleDelete, handleToggle, handleAddTodo } = useTodo(init)
-
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos))
-  }, [todos])
+  const {
+    todos,
+    todosCount,
+    pendingTodosCount,
+    handleDelete,
+    handleToggle,
+    handleAddTodo,
+  } = useTodos()
 
   return (
     <div className="todoApp">
-      <h1>TodoApp ( {todos.length} )</h1>
+      <h1>
+        TodoApp {todosCount}
+        <small> pendientes: {pendingTodosCount}</small>
+      </h1>
       <hr />
 
       <div className="row">
