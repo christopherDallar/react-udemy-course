@@ -16,6 +16,6 @@ import './index.css'
 // import { Father } from './components/07-tarea-memo/Father';
 import { TodoApp } from './components/08-useReducer/TodoApp'
 // import { MainApp } from './components/09-useContext/MainApp';
-
+// "test": "jest --watchAll"ç
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(<TodoApp />)
