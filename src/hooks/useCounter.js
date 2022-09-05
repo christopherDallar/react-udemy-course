@@ -7,8 +7,8 @@ export const useCounter = (initialState = 10) => {
   // 	setCounter(counter + factor);
   // };
 
-  const increment = () => {
-    setCounter(counter + 1)
+  const increment = (value = 1) => {
+    setCounter((current) => current + value)
   }
 
   const decrement = (factor = 1) => {
