@@ -12,4 +12,20 @@ describe('Testing <SearchScreen />', () => {
 
     expect(container).toMatchSnapshot()
   })
+
+  test('should to show batman and input with queryString Value ', () => {
+    render(
+      <MemoryRouter initialEntries={['/search?q=batman']}>
+        <SearchScreen />
+      </MemoryRouter>,
+    )
+
+    const input = screen.getByRole('textbox')
+    expect(input.value).toBe('batman')
+
+    const img = screen.getByRole('img')
+    expect(img.src).toContain('/src/assets/heroes/dc-batman.jpg')
+
+    screen.debug()
+  })
 })
