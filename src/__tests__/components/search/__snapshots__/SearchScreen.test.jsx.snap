@@ -15,7 +15,9 @@ exports[`Testing <SearchScreen /> should to match with snapshot, with  1`] = `
       <h4>
         Search
       </h4>
-      <form>
+      <form
+        aria-label="form"
+      >
         <input
           autocomplete="off"
           class="form-control"

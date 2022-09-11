@@ -1,6 +1,12 @@
-import { render, screen } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
+import { fireEvent, render, screen } from '@testing-library/react'
+import { MemoryRouter, useNavigate } from 'react-router-dom'
 import { SearchScreen } from '../../../components/search/SearchScreen'
+
+const mockedUseNavigate = jest.fn()
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockedUseNavigate,
+}))
 
 describe('Testing <SearchScreen />', () => {
   test('should to match with snapshot, with ', () => {
@@ -25,7 +31,31 @@ describe('Testing <SearchScreen />', () => {
 
     const img = screen.getByRole('img')
     expect(img.src).toContain('/src/assets/heroes/dc-batman.jpg')
+  })
 
-    screen.debug()
+  // test('should to show error if does not exist hero (batman123)', () => {
+
+  //  })
+
+  test('should call navigate to new screen', () => {
+    const inputValue = 'superman'
+
+    render(
+      <MemoryRouter initialEntries={['/search?q=batman']}>
+        <SearchScreen />
+      </MemoryRouter>,
+    )
+
+    const input = screen.getByRole('textbox')
+
+    fireEvent.change(input, {
+      target: { name: 'searchText', value: inputValue },
+    })
+
+    expect(input.value).toBe(inputValue)
+
+    const form = screen.getByLabelText('form')
+    fireEvent.submit(form)
+    expect(mockedUseNavigate).toHaveBeenCalledWith(`?q=${inputValue}`)
   })
 })
