@@ -1,4 +1,4 @@
-import { fileUpload } from '../../src/helpers/fileUpload'
+import { fileUpload } from '../../helpers/fileUpload'
 
 describe('Testing fileUpload', () => {
   test('should to upload correctly to cloudinary', async () => {
