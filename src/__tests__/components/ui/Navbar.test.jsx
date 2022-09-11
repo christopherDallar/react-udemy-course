@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { MemoryRouter, Route, Routes } from 'react-router-dom'
+import { MemoryRouter, Route, Routes, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../../auth/authContext'
 import { Navbar } from '../../../components/ui/Navbar'
 const {
@@ -8,6 +8,12 @@ const {
   fireEvent,
   renderHook,
 } = require('@testing-library/react')
+
+const mockedUseNavigate = jest.fn()
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockedUseNavigate,
+}))
 
 describe('Testing <Navbar />', () => {
   test('should to show user name logged', () => {
@@ -45,6 +51,7 @@ describe('Testing <Navbar />', () => {
     fireEvent.click(screen.getByRole('button'))
 
     expect(dispatch).toHaveBeenCalled()
-    expect(screen.getByRole('heading').innerHTML).toBe('Public route')
+    expect(mockedUseNavigate).toHaveBeenCalledWith('/login', { replace: true })
+    // expect(screen.getByRole('heading').innerHTML).toBe('Public route')
   })
 })
