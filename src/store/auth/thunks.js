@@ -70,13 +70,13 @@ export const startLoginWithEmailAndPassword = ({ email, password }) => {
       password,
     })
 
-    console.log('startLoginWithEmailAndPassword', {
-      ok,
-      errorMessage,
-      uid,
-      displayName,
-      photoURL,
-    })
+    // console.log('startLoginWithEmailAndPassword', {
+    //   ok,
+    //   errorMessage,
+    //   uid,
+    //   displayName,
+    //   photoURL,
+    // })
 
     if (!ok) {
       return dispatch(logout({ errorMessage }))
