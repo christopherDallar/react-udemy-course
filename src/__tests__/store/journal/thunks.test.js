@@ -13,5 +13,6 @@ describe('Testing Journal Thunks', () => {
     })
 
     await startNewNote()(dispatch, getState)
+    expect(dispatch).toHaveBeenCalledWith()
   })
 })
