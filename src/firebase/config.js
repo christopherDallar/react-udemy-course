@@ -4,6 +4,7 @@ import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore/lite'
 // Your web app's Firebase configuration
 
+console.log(process.env.NODE_ENV)
 // Dev/Orid
 // const firebaseConfig = {
 // 	apiKey: 'AIzaSyD-X9WnosSpzWr_HHI2IGPkBaCyCtS3cws',
