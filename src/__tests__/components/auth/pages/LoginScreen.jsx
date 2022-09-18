@@ -1,10 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { fireEvent, render, screen } from '@testing-library/react'
-import { act } from 'react-dom/test-utils'
 import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
 import { LoginScreen } from '../../../../components/auth/pages/LoginScreen'
-import { startGoogleSignIn } from '../../../../store/auth/thunks'
 import authSlice from '../../../../store/auth/authSlice'
 import { notAuthenticatedState } from '../../../fixtures/authFixtures'
 
@@ -22,10 +20,19 @@ const mockStartLoginWithEmailAndPassword = jest.fn()
 
 jest.mock('../../../../store/auth/thunks', () => ({
   startGoogleSignIn: () => mockStartGoogleSignIn,
-  startLoginWithEmailAndPassword: () => mockStartLoginWithEmailAndPassword,
+  startLoginWithEmailAndPassword: ({ email, password }) => {
+    return () => mockStartLoginWithEmailAndPassword({ email, password })
+  },
+}))
+
+jest.mock('react-redux', () => ({
+  ...jest.requireActual('react-redux'),
+  useDispatch: () => (fn) => fn(),
 }))
 
 describe('Testing <LoginScreen />', () => {
+  beforeEach(() => jest.clearAllMocks())
+
   test('should to show component well', () => {
     render(
       <Provider store={store}>
@@ -55,8 +62,8 @@ describe('Testing <LoginScreen />', () => {
   })
 
   test('should to submit form and call startLoginWithEmailAndPassword', () => {
-    const email = 'christophergmail.com'
-    const password = '123456'
+    const email = 'christopher@gmail.com'
+    const password = '1234567'
 
     render(
       <Provider store={store}>
@@ -77,7 +84,11 @@ describe('Testing <LoginScreen />', () => {
     const form = screen.getByLabelText('form-login')
     fireEvent.submit(form)
 
-    expect(form).toBeTruthy()
-    // expect(mockStartLoginWithEmailAndPassword).toHaveBeenCalledWith()
+    // screen.debug()
+    // expect(form).toBeTruthy()
+    expect(mockStartLoginWithEmailAndPassword).toHaveBeenCalledWith({
+      email,
+      password,
+    })
   })
 })
