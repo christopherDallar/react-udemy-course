@@ -56,6 +56,7 @@ export const LoginScreen = () => {
   }
 
   const onGoogleSignIn = (e) => {
+    console.log('ssss')
     dispatch(startGoogleSignIn())
   }
 
@@ -113,7 +114,7 @@ export const LoginScreen = () => {
                   fullWidth
                   onClick={onGoogleSignIn}
                   disabled={isCheckingAuthentication}
-                  data-alt-text="googleSignInBtn"
+                  aria-label="googleSignInBtn"
                 >
                   <Google />
                   <Typography sx={{ ml: 1 }}>Google</Typography>

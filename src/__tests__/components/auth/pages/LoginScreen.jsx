@@ -6,23 +6,25 @@ import { MemoryRouter } from 'react-router-dom'
 import { LoginScreen } from '../../../../components/auth/pages/LoginScreen'
 import { startGoogleSignIn } from '../../../../store/auth'
 import authSlice from '../../../../store/auth/authSlice'
+import { notAuthenticatedState } from '../../../fixtures/authFixtures'
 
 const store = configureStore({
   reducer: {
     auth: authSlice,
   },
-  // preloadedState: {
-
-  // }
+  preloadedState: {
+    auth: notAuthenticatedState,
+  },
 })
 
 jest.mock('../../../../store/auth')
 
-// jest.mock('react-redux', () => {
-// useDispatch: () => {
-//   return jest.fn()
-// }
-// })
+// const useDispatch = jest.fn()
+
+// jest.mock('react-redux', () => ({
+//   ...jest.requireActual('react-redux'),
+//   useDispatch,
+// }))
 
 describe('Testing <LoginScreen />', () => {
   test('should to show component well', () => {
@@ -37,7 +39,7 @@ describe('Testing <LoginScreen />', () => {
     expect(screen.getAllByText('Login').length).toBeGreaterThanOrEqual(1)
   })
 
-  test('should to call onGoogleSignIn', () => {
+  test('should to call onGoogleSignIn startGoogleSignIn', () => {
     render(
       <Provider store={store}>
         <MemoryRouter>
@@ -46,10 +48,12 @@ describe('Testing <LoginScreen />', () => {
       </Provider>,
     )
 
-    const gBtn = screen.getAllByAltText('googleSignInBtn')
+    const gBtn = screen.getByLabelText('googleSignInBtn')
     // screen.debug()
     fireEvent.click(gBtn)
 
-    // expect(startGoogleSignIn()).toBeTruthy()
+    // screen.debug()
+    expect(gBtn).toBeTruthy()
+    expect(store.dispatch).toBeCalledWith()
   })
 })
