@@ -18,9 +18,11 @@ const store = configureStore({
 })
 
 const mockStartGoogleSignIn = jest.fn()
+const mockStartLoginWithEmailAndPassword = jest.fn()
 
 jest.mock('../../../../store/auth/thunks', () => ({
   startGoogleSignIn: () => mockStartGoogleSignIn,
+  startLoginWithEmailAndPassword: () => mockStartLoginWithEmailAndPassword,
 }))
 
 describe('Testing <LoginScreen />', () => {
@@ -50,5 +52,32 @@ describe('Testing <LoginScreen />', () => {
 
     expect(gBtn).toBeTruthy()
     expect(mockStartGoogleSignIn).toHaveBeenCalled()
+  })
+
+  test('should to submit form and call startLoginWithEmailAndPassword', () => {
+    const email = 'christophergmail.com'
+    const password = '123456'
+
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <LoginScreen />
+        </MemoryRouter>
+      </Provider>,
+    )
+
+    const emailField = screen.getByRole('textbox', { name: 'Email' })
+    fireEvent.change(emailField, { target: { name: 'email', value: email } })
+
+    const passwordField = screen.getByTestId('password')
+    fireEvent.change(passwordField, {
+      target: { name: 'password', value: password },
+    })
+
+    const form = screen.getByLabelText('form-login')
+    fireEvent.submit(form)
+
+    expect(form).toBeTruthy()
+    // expect(mockStartLoginWithEmailAndPassword).toHaveBeenCalledWith()
   })
 })

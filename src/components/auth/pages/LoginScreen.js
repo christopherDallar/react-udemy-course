@@ -62,7 +62,7 @@ export const LoginScreen = () => {
   return (
     <>
       <AuthLayout title="Login">
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} aria-label="form-login">
           <Grid container>
             <Grid item xs={12} sx={{ mt: 2 }}>
               <TextField
@@ -85,6 +85,9 @@ export const LoginScreen = () => {
                 placeholder="password"
                 fullWidth
                 name="password"
+                inputProps={{
+                  'data-testid': 'password',
+                }}
                 value={password}
                 onChange={onInputChange}
                 error={!!passwordValid && formSubmitted}
