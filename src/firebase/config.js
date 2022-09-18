@@ -2,9 +2,14 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore/lite'
+import { getEnvironments } from '../helpers'
 // Your web app's Firebase configuration
 
-console.log(process.env.NODE_ENV)
+// console.log(process.env.NODE_ENV)
+
+const env = getEnvironments()
+console.log(env)
+
 // Dev/Orid
 // const firebaseConfig = {
 // 	apiKey: 'AIzaSyD-X9WnosSpzWr_HHI2IGPkBaCyCtS3cws',
