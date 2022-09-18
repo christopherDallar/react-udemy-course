@@ -4,7 +4,7 @@ import { act } from 'react-dom/test-utils'
 import { Provider } from 'react-redux'
 import { MemoryRouter } from 'react-router-dom'
 import { LoginScreen } from '../../../../components/auth/pages/LoginScreen'
-import { startGoogleSignIn } from '../../../../store/auth'
+import { startGoogleSignIn } from '../../../../store/auth/thunks'
 import authSlice from '../../../../store/auth/authSlice'
 import { notAuthenticatedState } from '../../../fixtures/authFixtures'
 
@@ -17,14 +17,11 @@ const store = configureStore({
   },
 })
 
-jest.mock('../../../../store/auth')
+const mockStartGoogleSignIn = jest.fn()
 
-// const useDispatch = jest.fn()
-
-// jest.mock('react-redux', () => ({
-//   ...jest.requireActual('react-redux'),
-//   useDispatch,
-// }))
+jest.mock('../../../../store/auth/thunks', () => ({
+  startGoogleSignIn: () => mockStartGoogleSignIn,
+}))
 
 describe('Testing <LoginScreen />', () => {
   test('should to show component well', () => {
@@ -49,11 +46,9 @@ describe('Testing <LoginScreen />', () => {
     )
 
     const gBtn = screen.getByLabelText('googleSignInBtn')
-    // screen.debug()
     fireEvent.click(gBtn)
 
-    // screen.debug()
     expect(gBtn).toBeTruthy()
-    expect(store.dispatch).toBeCalledWith()
+    expect(mockStartGoogleSignIn).toHaveBeenCalled()
   })
 })

@@ -56,7 +56,6 @@ export const LoginScreen = () => {
   }
 
   const onGoogleSignIn = (e) => {
-    console.log('ssss')
     dispatch(startGoogleSignIn())
   }
 
