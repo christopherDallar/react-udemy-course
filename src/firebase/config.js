@@ -7,8 +7,15 @@ import { getEnvironments } from '../helpers'
 
 // console.log(process.env.NODE_ENV)
 
-const env = getEnvironments()
-console.log(env)
+const {
+  REACT_APP_APIKEY,
+  REACT_APP_AUTHDOMAIN,
+  REACT_APP_PROJECTID,
+  REACT_APP_STORAGEBUCKET,
+  REACT_APP_MESSAGINGSENDERID,
+  REACT_APP_APPID,
+  REACT_APP_DATABASEURL,
+} = getEnvironments()
 
 // Dev/Orid
 // const firebaseConfig = {
@@ -22,15 +29,16 @@ console.log(env)
 
 // Testing
 const firebaseConfig = {
-  apiKey: 'AIzaSyBe0QRV15YS7w6v8N4FfuCZPXDK0-lkCZo',
-  authDomain: 'expreimento1.firebaseapp.com',
-  databaseURL: 'https://expreimento1.firebaseio.com',
-  projectId: 'expreimento1',
-  storageBucket: 'expreimento1.appspot.com',
-  messagingSenderId: '87217011344',
-  appId: '1:87217011344:web:64be94dc2fec8d80e4b615',
+  apiKey: REACT_APP_APIKEY,
+  authDomain: REACT_APP_AUTHDOMAIN,
+  databaseURL: REACT_APP_DATABASEURL,
+  projectId: REACT_APP_PROJECTID,
+  storageBucket: REACT_APP_STORAGEBUCKET,
+  messagingSenderId: REACT_APP_MESSAGINGSENDERID,
+  appId: REACT_APP_APPID,
 }
 
+console.log(firebaseConfig)
 // Initialize Firebase
 export const FirebaseApp = initializeApp(firebaseConfig)
 export const FirebaseAuth = getAuth(FirebaseApp)
