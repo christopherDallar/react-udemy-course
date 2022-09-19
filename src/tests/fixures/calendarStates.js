@@ -5,6 +5,11 @@ export const events = [
     end: new Date('2022-10-21 15:00:00'),
     title: "Christopher's Birthday",
     notes: 'Some note written',
+    bgColor: '',
+    user: {
+      _id: '3333331',
+      name: 'Christopher',
+    },
   },
   {
     id: '2',
@@ -12,6 +17,11 @@ export const events = [
     end: new Date('2022-11-09 15:00:00'),
     title: "Melissa's Birthday",
     notes: 'Some note written by Melissa',
+    bgColor: '',
+    user: {
+      _id: '2222221',
+      name: 'juan',
+    },
   },
 ]
 
