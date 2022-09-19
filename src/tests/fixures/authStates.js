@@ -17,9 +17,6 @@ export const authenticatedState = {
 
 export const notAuthenticatedState = {
   status: authStatusEnum.notAuthenticated, // authenticated, not authenticated
-  user: {
-    uid: 'abc',
-    name: 'Christopher',
-  },
+  user: {},
   errorMessage: undefined,
 }
