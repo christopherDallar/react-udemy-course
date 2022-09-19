@@ -2,6 +2,7 @@ import {
   calendarSlice,
   onAddNewEvent,
   onDeleteEvent,
+  onLoadEvents,
   onLogoutCalendar,
   onSetActiveEvent,
   onUpdateEvent,
@@ -111,10 +112,21 @@ describe('Testing calendarSlice', () => {
       onDeleteEvent(),
     )
 
+    expect(state.activeEvent).toBe(null)
     expect(state.events).not.toContain(events[0])
   })
 
-  test('should onLogoutCalendar have to remove event', () => {
+  test('should onLoadEvents have to remove event', () => {
+    const state = calendarSlice.reducer(initialState, onLoadEvents(events))
+
+    expect(state.isLoadingEvents).toBeFalsy()
+    expect(state.events).toEqual(events)
+
+    const newState = calendarSlice.reducer(state, onLoadEvents(events))
+    expect(newState.events.length).toBe(events.length)
+  })
+
+  test('should onLogoutCalendar have to be initial state', () => {
     const state = calendarSlice.reducer(
       calendarWithActiveEventState,
       onLogoutCalendar(),
