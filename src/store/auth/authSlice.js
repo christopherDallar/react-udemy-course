@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { authStatusEnum } from '../../helpers';
+import { createSlice } from '@reduxjs/toolkit'
+import { authStatusEnum } from '../../helpers'
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -10,29 +10,29 @@ export const authSlice = createSlice({
   },
   reducers: {
     onChecking: (state) => {
-      state.status = authStatusEnum.checking;
-      state.user = {};
-      state.errorMessage = undefined;
+      state.status = authStatusEnum.checking
+      state.user = {}
+      state.errorMessage = undefined
     },
     onLogin: (state, { payload }) => {
-      state.status = authStatusEnum.authenticated;
-      state.user = payload;
-      state.errorMessage = undefined;
+      state.status = authStatusEnum.authenticated
+      state.user = payload
+      state.errorMessage = undefined
     },
     onLogout: (state, { payload }) => {
-      state.status = authStatusEnum.notAuthenticated;
-      state.user = {};
-      state.errorMessage = payload;
+      state.status = authStatusEnum.notAuthenticated
+      state.user = {}
+      state.errorMessage = payload
     },
     clearErrorMessage: (state) => {
-      state.errorMessage = undefined;
+      state.errorMessage = undefined
     },
   },
-});
+})
 
 export const {
   onChecking,
   onLogin,
   onLogout,
   clearErrorMessage,
-} = authSlice.actions;
+} = authSlice.actions
