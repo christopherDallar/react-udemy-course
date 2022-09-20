@@ -60,4 +60,32 @@ describe('Testing useAuthStore.js', () => {
     expect(localStorage.getItem('token')).toEqual(expect.any(String));
     expect(localStorage.getItem('token-init-date')).toEqual(expect.any(String));
   });
+
+  test('should startLogin do login wrong', async () => {
+    localStorage.clear();
+    const mockStore = getMockStore({ ...notAuthenticatedState });
+    const { result } = renderHook(() => useAuthStore(), {
+      wrapper: ({ children }) => (
+        <Provider store={mockStore}>{children}</Provider>
+      ),
+    });
+
+    await act(async () => {
+      await result.current.startLogin({
+        email: 'lsadsad@gf.com',
+        password: '123456',
+      });
+    });
+
+    const { errorMessage, status, user } = result.current;
+
+    expect(localStorage.getItem('token')).toBe(null);
+    expect({ errorMessage, status, user }).toEqual({
+      errorMessage: expect.any(String),
+      status: 'not-authenticated',
+      user: {},
+    });
+
+    await waitFor(() => expect(result.current.errorMessage).toBe(undefined));
+  });
 });
