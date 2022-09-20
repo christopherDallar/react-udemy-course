@@ -18,6 +18,6 @@ describe('Testing FabDelete', () => {
     expect(btn.classList).toContain('btn');
     expect(btn.classList).toContain('btn-danger');
     expect(btn.classList).toContain('fab-danger');
-    expect(startDeletingEvent).toHaveBeenCalled();
+    expect(startDeletingEvent).toHaveBeenCalledWith();
   });
 });
