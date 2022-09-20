@@ -1,13 +1,14 @@
-import Modal from 'react-modal'
-import React, { useEffect, useMemo, useState } from 'react'
-import { addHours, differenceInSeconds } from 'date-fns'
-import DatePicker, { registerLocale } from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker.css'
-import es from 'date-fns/locale/es'
-import Swal from 'sweetalert2'
-import 'sweetalert2/dist/sweetalert2.min.css'
-import { useCalendarStore, useUiStore } from '../../hooks'
-registerLocale('es', es)
+import Modal from 'react-modal';
+import React, { useEffect, useMemo, useState } from 'react';
+import { addHours, differenceInSeconds } from 'date-fns';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import es from 'date-fns/locale/es';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+import { useCalendarStore, useUiStore } from '../../hooks';
+import { getEnvVariables } from '../../helpers';
+registerLocale('es', es);
 
 const customStyles = {
   content: {
@@ -18,66 +19,68 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
   },
-}
+};
 
-Modal.setAppElement('#root')
+if (getEnvVariables().VITE_MODE !== 'test') {
+  Modal.setAppElement('#root');
+}
 
 const initialsFormValues = {
   title: '',
   notes: '',
   start: new Date(),
   end: addHours(new Date(), 2),
-}
+};
 
 export const CalendarModal = () => {
-  const { isDateModalOpen, closeDateModal } = useUiStore()
-  const { activeEvent, startSavingEvent } = useCalendarStore()
+  const { isDateModalOpen, closeDateModal } = useUiStore();
+  const { activeEvent, startSavingEvent } = useCalendarStore();
 
-  const [formSubmitted, setFormSubmitted] = useState(false)
-  const [formValues, setFormValues] = useState(initialsFormValues)
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formValues, setFormValues] = useState(initialsFormValues);
   const titleClass = useMemo(() => {
     if (!formSubmitted) {
-      return ''
+      return '';
     }
 
-    return formValues.title.length > 0 ? '' : 'is-invalid'
-  }, [formValues.title, formSubmitted])
+    return formValues.title.length > 0 ? '' : 'is-invalid';
+  }, [formValues.title, formSubmitted]);
 
   useEffect(() => {
     if (activeEvent !== null) {
-      setFormValues({ ...activeEvent })
+      setFormValues({ ...activeEvent });
     }
-  }, [activeEvent])
+  }, [activeEvent]);
 
   const onInputChanged = ({ target }) => {
-    setFormValues({ ...formValues, [target.name]: target.value })
-  }
+    setFormValues({ ...formValues, [target.name]: target.value });
+  };
 
   const onDateChanged = (event, changing) => {
-    setFormValues({ ...formValues, [changing]: event })
-  }
+    setFormValues({ ...formValues, [changing]: event });
+  };
 
   const onSubmit = async (event) => {
-    event.preventDefault()
-    setFormSubmitted(true)
+    event.preventDefault();
+    setFormSubmitted(true);
 
-    const difference = differenceInSeconds(formValues.end, formValues.start)
+    const difference = differenceInSeconds(formValues.end, formValues.start);
 
     if (isNaN(difference) || difference <= 0) {
-      Swal.fire('Wrong Dates', 'Check dates input', 'error')
-      console.log('Date error')
-      return
+      Swal.fire('Wrong Dates', 'Check dates input', 'error');
+      console.log('Date error');
+      return;
     }
 
     if (!formValues.title) {
-      return
+      return;
     }
 
-    console.log(formValues)
-    await startSavingEvent(formValues)
-    closeDateModal()
-    setFormSubmitted(false)
-  }
+    console.log(formValues);
+    await startSavingEvent(formValues);
+    closeDateModal();
+    setFormSubmitted(false);
+  };
 
   return (
     <Modal
@@ -157,5 +160,5 @@ export const CalendarModal = () => {
         </button>
       </form>
     </Modal>
-  )
-}
+  );
+};
