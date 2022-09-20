@@ -1,29 +1,23 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { fireEvent, render, screen } from '@testing-library/react'
-import { Provider } from 'react-redux'
-import { FabDelete } from '../../../calendar/components/FabDelete'
-import { store } from '../../../store'
+import { fireEvent, render, screen } from '@testing-library/react';
+import { FabDelete } from '../../../calendar/components/FabDelete';
+import { useCalendarStore } from '../../../hooks';
 
-const mockStartDeletingEvent = jest.fn()
-
-jest.mock('../../../hooks/useCalendarStore', () => ({
-  ...jest.requireActual('../../../hooks/useCalendarStore'),
-  useCalendarStore: () => ({
-    startDeletingEvent: mockStartDeletingEvent,
-  }),
-}))
+jest.mock('../../../hooks/useCalendarStore');
 
 describe('Testing FabDelete', () => {
   test('should show render well', () => {
-    render(
-      <Provider store={store}>
-        <FabDelete />
-      </Provider>,
-    )
+    const startDeletingEvent = jest.fn();
+    useCalendarStore.mockReturnValue({
+      startDeletingEvent,
+    });
+    render(<FabDelete />);
 
-    const btn = screen.getByRole('button')
-    fireEvent.click(btn)
+    const btn = screen.getByRole('button');
+    fireEvent.click(btn);
 
-    expect(mockStartDeletingEvent).toHaveBeenCalled()
-  })
-})
+    expect(btn.classList).toContain('btn');
+    expect(btn.classList).toContain('btn-danger');
+    expect(btn.classList).toContain('fab-danger');
+    expect(startDeletingEvent).toHaveBeenCalled();
+  });
+});
