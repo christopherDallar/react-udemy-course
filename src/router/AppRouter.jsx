@@ -24,24 +24,18 @@ export const AppRouter = () => {
   }
 
   return (
-    <BrowserRouter>
-      // Added # to route //{' '}
-      <HashRouter>
-        <Routes>
-          {status !== authStatusEnum.authenticated ? (
-            <>
-              <Route path="/auth/*" element={<LoginPage />} />
-              <Route path="/*" element={<Navigate to="/auth/login" />} />
-            </>
-          ) : (
-            <>
-              <Route path="/" element={<CalendarPage />} />
-              <Route path="/*" element={<Navigate to="/" />} />
-            </>
-          )}
-        </Routes>
-        //{' '}
-      </HashRouter>
-    </BrowserRouter>
+    <Routes>
+      {status !== authStatusEnum.authenticated ? (
+        <>
+          <Route path="/auth/*" element={<LoginPage />} />
+          <Route path="/*" element={<Navigate to="/auth/login" />} />
+        </>
+      ) : (
+        <>
+          <Route path="/" element={<CalendarPage />} />
+          <Route path="/*" element={<Navigate to="/" />} />
+        </>
+      )}
+    </Routes>
   );
 };
