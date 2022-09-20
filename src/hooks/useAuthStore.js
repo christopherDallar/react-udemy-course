@@ -63,7 +63,7 @@ export const useAuthStore = () => {
         password,
       });
 
-      console.log(data);
+      // console.log(data);
 
       // New login
       const { uid, token } = data;
@@ -73,7 +73,7 @@ export const useAuthStore = () => {
 
       dispatch(onLogin({ uid, name: data.name }));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       dispatch(onLogout(error.response.data?.msg || ''));
       setTimeout(() => {
         dispatch(clearErrorMessage());

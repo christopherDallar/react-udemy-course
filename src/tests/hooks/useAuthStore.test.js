@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { act, renderHook, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
+import calendarApi from '../../api/calendarApi';
 import { useAuthStore } from '../../hooks/useAuthStore';
 import { authSlice } from '../../store';
 import { initialState, notAuthenticatedState } from '../fixures/authStates';
@@ -18,6 +19,10 @@ const getMockStore = (initialState) => {
 };
 
 describe('Testing useAuthStore.js', () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
   test('should to return default values', () => {
     const mockStore = getMockStore({ ...initialState });
     const { result } = renderHook(() => useAuthStore(), {
@@ -37,8 +42,8 @@ describe('Testing useAuthStore.js', () => {
     });
   });
 
+  // startLogin
   test('should startLogin do login well', async () => {
-    localStorage.clear();
     const mockStore = getMockStore({ ...notAuthenticatedState });
     const { result } = renderHook(() => useAuthStore(), {
       wrapper: ({ children }) => (
@@ -62,7 +67,6 @@ describe('Testing useAuthStore.js', () => {
   });
 
   test('should startLogin do login wrong', async () => {
-    localStorage.clear();
     const mockStore = getMockStore({ ...notAuthenticatedState });
     const { result } = renderHook(() => useAuthStore(), {
       wrapper: ({ children }) => (
@@ -87,5 +91,44 @@ describe('Testing useAuthStore.js', () => {
     });
 
     await waitFor(() => expect(result.current.errorMessage).toBe(undefined));
+  });
+
+  // startRegister
+  test('should startRegister do login well', async () => {
+    const newUser = {
+      email: 'test2@gmail.com',
+      name: 'test user 2',
+      password: '123456',
+    };
+
+    const mockStore = getMockStore({ ...initialState });
+    const { result } = renderHook(() => useAuthStore(), {
+      wrapper: ({ children }) => (
+        <Provider store={mockStore}>{children}</Provider>
+      ),
+    });
+
+    const spy = jest.spyOn(calendarApi, 'post').mockReturnValue({
+      data: {
+        ok: true,
+        uid: 'abc123',
+        name: 'test user',
+        token: 'bearer abc 123',
+      },
+    });
+
+    await act(async () => {
+      await result.current.startRegister(newUser);
+    });
+
+    const { errorMessage, status, user } = result.current;
+
+    expect({ errorMessage, status, user }).toEqual({
+      errorMessage: undefined,
+      status: 'authenticated',
+      user: { uid: 'abc123', name: 'test user' },
+    });
+
+    spy.mockRestore();
   });
 });
