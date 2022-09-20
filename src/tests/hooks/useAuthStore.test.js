@@ -154,4 +154,52 @@ describe('Testing useAuthStore.js', () => {
 
     await waitFor(() => expect(result.current.errorMessage).toBe(undefined));
   });
+
+  test('should checkAuthToken must to fail if there is not token', async () => {
+    const mockStore = getMockStore({ ...initialState });
+    const { result } = renderHook(() => useAuthStore(), {
+      wrapper: ({ children }) => (
+        <Provider store={mockStore}>{children}</Provider>
+      ),
+    });
+
+    await act(async () => {
+      await result.current.checkAuthToken(testUserCredentials);
+    });
+
+    const { status, user, errorMessage } = result.current;
+    // expect(localStorage.getItem('token')).toBe(null);
+    expect({ status, user, errorMessage }).toEqual({
+      status: 'not-authenticated',
+      user: {},
+      errorMessage: undefined,
+    });
+  });
+
+  test('should checkAuthToken must to authenticate user if there is token', async () => {
+    const { data } = await calendarApi.post('/auth', testUserCredentials);
+    localStorage.setItem('token', data.token);
+
+    const mockStore = getMockStore({ ...initialState });
+    const { result } = renderHook(() => useAuthStore(), {
+      wrapper: ({ children }) => (
+        <Provider store={mockStore}>{children}</Provider>
+      ),
+    });
+
+    await act(async () => {
+      // await result.current.startLogin(testUserCredentials);
+      await result.current.checkAuthToken(testUserCredentials);
+    });
+
+    const { status, user, errorMessage } = result.current;
+    console.log({ status, user, errorMessage });
+
+    // expect(localStorage.getItem('token')).toBe(String);
+    expect({ status, user, errorMessage }).toEqual({
+      status: 'authenticated',
+      user: { uid: '6327aed253e2fc83741aa5b7', name: 'Test user' },
+      errorMessage: undefined,
+    });
+  });
 });
