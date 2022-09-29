@@ -1,2 +1,2 @@
-cd /Users/admin/Documents/Programacion/course/react-fernando/10-calendar-backend
+cd /Users/admin/Documents/Programation/Course/react-fernando/10-calendar-backend
 yarn dev
