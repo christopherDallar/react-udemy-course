@@ -6,8 +6,8 @@ import {
   Navigate,
   HashRouter,
 } from 'react-router-dom';
-import { LoginPage } from './../auth';
-import { CalendarPage } from './../calendar';
+import { LoginPage } from '../auth';
+import { CalendarPage } from '../calendar';
 import { authStatusEnum } from '../helpers';
 import { useAuthStore } from '../hooks';
 
